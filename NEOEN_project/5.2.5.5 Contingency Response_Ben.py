@@ -25,6 +25,7 @@ redirect.psse2py()
 psspy.psseinit(50000)
 
 # Set Simulation Path.
+# if on laptop
 LoadScenario = "SummerPeakLoad"
 ClauseName = "5.2.5.5 Contingency Response"
 ProgramPath = "C:/NEOEN/P_SimulationScripts/"
@@ -33,10 +34,19 @@ HuaweiModelPath = "C:/NEOEN/Huawei_models/"
 OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
 FigurePath = "C:/NEOEN/R_Results/"
 
+# if on desktop
+# LoadScenario = "SummerPeakLoad"
+# ClauseName = "5.2.5.5 Contingency Response"
+# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "C:/NEOEN/NEM_files/"
+# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
+# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+# FigurePath = "C:/NEOEN/R_Results/"
+
 if LoadScenario == "SummerPeakLoad":
-    file_name = "SummerHi-20171219-153047-34-SystemNormal_all_bus_DDSF"
+    file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
 if LoadScenario == "SummerLowLoad":
-    file_name = "SummerLo-20171226-043047-34-SystemNormal_all_but_DDSF"
+    file_name = "SummerLo-20171226-043047-34-SystemNormal_all"
 if LoadScenario == "SimplifiedSystem":
     file_name = "NEOEN Western Downs Solar Farm_C3WV_mod_T"
 
@@ -139,19 +149,34 @@ for i in range(0, len(Branch_Outage_List_Start)):
         psspy.machine_data_2(37530, r"""12""", [0, _i, _i, _i, _i, _i],
                              [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
         psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                             [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                             [100, _f,60, -40, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
         psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                             [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                             [100, _f, 60, -40, 120, _f,120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
         psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                             [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                             [100, _f, 60, -40, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
         psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                             [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                             [100, _f, 60, -40, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
         # psspy.machine_data_2(100, r"""1""", [_i, _i, _i, _i, _i, _i],
         #                      [_f, _f, 5, _f, 132, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
         # psspy.machine_data_2(100, r"""1""", [_i, _i, _i, _i, _i, _i],
         #                      [_f, _f, _f, 5, 132, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
         #                       _f])  # be careful, partial active power = not enough solar irraidance.
         psspy.fdns([1, 0, 0, 1, 0, 0, 99, 0])
+        t_q = 0.569
+        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
+        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, -0.5)
+        psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 13, -t_q)
+        psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 14, t_q)
+        psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 13, -t_q)
+        psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 14, t_q)
+        psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 13, -t_q)
+        psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 14, t_q)
+        psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 13, -t_q)
+        psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 14, t_q)
+        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 23, 0.001)  # QV droop deadband
+        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 24, 0.4)  # QV droop
+        psspy.change_plmod_icon(101, r"""1""", r"""GPMPPC""", 4, 2)  # kVar control =0, PF control = 1, Droop Control = 2, Voltage Control = 3
+        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 10, 1.0)
 
         for t_var in range(0, 9000):
             psspy.change_var(t_var, 0)
@@ -165,14 +190,18 @@ for i in range(0, len(Branch_Outage_List_Start)):
         psspy.voltage_channel([2, -1, -1, 101], r"""Inverter Voltage Mag.""")
         psspy.voltage_channel([3, -1, -1, 400], r"""WDs SF POC Voltage Mag.""")
         psspy.branch_p_and_q_channel([4, -1, -1, 400, 46660], r"""1""", [r"""P Injection""", r"""Q Injection"""])
-        ierr = psspy.machine_array_channel([7, 2, 101], r"""1""", r"""Pelec 101""")
-        ierr = psspy.machine_array_channel([8, 3, 101], r"""1""", r"""Qelec 101""")
-        ierr = psspy.machine_array_channel([9, 2, 102], r"""1""", r"""Pelec 102""")
-        ierr = psspy.machine_array_channel([10, 3, 102], r"""1""", r"""Qelec 102""")
-        ierr = psspy.machine_array_channel([11, 2, 103], r"""1""", r"""Pelec 103""")
-        ierr = psspy.machine_array_channel([12, 3, 103], r"""1""", r"""Qelec 103""")
-        ierr = psspy.machine_array_channel([13, 2, 104], r"""1""", r"""Pelec 104""")
-        ierr = psspy.machine_array_channel([14, 3, 104], r"""1""", r"""Qelec 104""")
+        psspy.branch_p_and_q_channel([7, -1, -1, 101, 111], r"""1""", [r"""Pelec 101""", r"""Qelec 101"""])
+        psspy.branch_p_and_q_channel([9, -1, -1, 102, 112], r"""1""", [r"""Pelec 102""", r"""Qelec 102"""])
+        psspy.branch_p_and_q_channel([11, -1, -1, 103, 113], r"""1""", [r"""Pelec 103""", r"""Qelec 103"""])
+        psspy.branch_p_and_q_channel([13, -1, -1, 104, 114], r"""1""", [r"""Pelec 104""", r"""Qelec 104"""])
+        # ierr = psspy.machine_array_channel([7, 2, 101], r"""1""", r"""Pelec 101""")
+        # ierr = psspy.machine_array_channel([8, 3, 101], r"""1""", r"""Qelec 101""")
+        # ierr = psspy.machine_array_channel([9, 2, 102], r"""1""", r"""Pelec 102""")
+        # ierr = psspy.machine_array_channel([10, 3, 102], r"""1""", r"""Qelec 102""")
+        # ierr = psspy.machine_array_channel([11, 2, 103], r"""1""", r"""Pelec 103""")
+        # ierr = psspy.machine_array_channel([12, 3, 103], r"""1""", r"""Qelec 103""")
+        # ierr = psspy.machine_array_channel([13, 2, 104], r"""1""", r"""Pelec 104""")
+        # ierr = psspy.machine_array_channel([14, 3, 104], r"""1""", r"""Qelec 104""")
         [ierr, var_ppc_conp] = psspy.mdlind(101, '1', 'EXC', 'CON')
         [ierr, var_ppc_setp] = psspy.mdlind(101, '1', 'EXC', 'VAR')
         [ierr, var_ppc_mode] = psspy.mdlind(101, '1', 'EXC', 'ICON')
@@ -216,7 +245,7 @@ for i in range(0, len(Branch_Outage_List_Start)):
             if Branch_kV[i] == 132:
                 fault_time = 0.500
 
-        if fault_type == 2:  # single phase
+        if fault_type == 2:  # single phase, no path to ground, line-to-ground, breaker @ bus i,
             psspy.dist_spcb_fault(Branch_Outage_List_Start[i], Branch_Outage_List_End[i], '1', [3, 0, 1, 1, 0, 0],
                                   [0.5, 0.0, 0.000001, 0.0, 0.0])
             fault_name = 'SinglePhase'
@@ -225,7 +254,7 @@ for i in range(0, len(Branch_Outage_List_Start)):
             if Branch_kV[i] == 132:
                 fault_time = 0.720
 
-        if fault_type == 3:  # phase to phase
+        if fault_type == 3:  # phase to phase,  no path to ground, line-to-line-not to ground, breaker @ bus i, #line to ground=9999
             psspy.dist_spcb_fault(Branch_Outage_List_Start[i], Branch_Outage_List_End[i], '1', [3, 0, 2, 1, 0, 0],
                                   [0.5, 9999.0, 9999.0, 0.0, 0.000001])
             fault_name = 'TwoPhase'
@@ -234,7 +263,7 @@ for i in range(0, len(Branch_Outage_List_Start)):
             if Branch_kV[i] == 132:
                 fault_time = 0.720
 
-        if fault_type == 4:  # phase to phase to ground
+        if fault_type == 4:  # phase to phase to ground  #line to line to ground, line to line
             psspy.dist_spcb_fault(Branch_Outage_List_Start[i], Branch_Outage_List_End[i], '1', [3, 0, 2, 1, 0, 0],
                                   [0.5, 0.0, 0.000001, 0.0, 0.000001])
             fault_name = 'TwoPhaseGround'
@@ -311,9 +340,9 @@ for i in range(0, len(Branch_Outage_List_Start)):
         CurrentAx[1][1].set_ylabel(r"""Power/MVar""")
 
         CurrentAx[0][0].set_title(r"""Inverter Terminal Voltage""")
-        CurrentAx[1][0].set_title(r"""WDs SF PoC Voltage""")
-        CurrentAx[0][1].set_title(r"""WDs SF Active Power Output""")
-        CurrentAx[1][1].set_title(r"""WDs SF Reactive Power Output""")
+        CurrentAx[1][0].set_title(r"""WDSF PoC Voltage""")
+        CurrentAx[0][1].set_title(r"""WDSF Active Power Output""")
+        CurrentAx[1][1].set_title(r"""WDSF Reactive Power Output""")
 
         save_figure_name = GraphPath + "/" + EventName[i] + ' ' + str(Branch_Outage_List_Start[i]) + '-' + str(
             Branch_Outage_List_End[i]) + '.png'
@@ -340,10 +369,10 @@ for i in range(0, len(Branch_Outage_List_Start)):
         mpl.rcParams['legend.fontsize'] = 'small'
 
         CurrentFig, CurrentAx = plt.subplots(2, 2, sharex=False, figsize=(20, 15));
-        CurrentAx[0][0].plot(chandata['time'], 100*p_data_101);
-        CurrentAx[1][0].plot(chandata['time'], 100*p_data_102);
-        CurrentAx[0][1].plot(chandata['time'], 100*p_data_103);
-        CurrentAx[1][1].plot(chandata['time'], 100*p_data_104);
+        CurrentAx[0][0].plot(chandata['time'], p_data_101)
+        CurrentAx[1][0].plot(chandata['time'], p_data_102)
+        CurrentAx[0][1].plot(chandata['time'], p_data_103)
+        CurrentAx[1][1].plot(chandata['time'], p_data_104)
 
         CurrentAx[0][0].tick_params(axis='both', which='both', labelsize=24)
         CurrentAx[1][0].tick_params(axis='both', which='both', labelsize=24)
@@ -370,10 +399,10 @@ for i in range(0, len(Branch_Outage_List_Start)):
         CurrentAx[0][1].set_ylabel(r"""Power/MW""")
         CurrentAx[1][1].set_ylabel(r"""Power/MW""")
 
-        CurrentAx[0][0].set_title(r"""Inverter 101 Active Power Output""")
-        CurrentAx[1][0].set_title(r"""Inverter 102 Active Power Output""")
-        CurrentAx[0][1].set_title(r"""Inverter 103 Active Power Output""")
-        CurrentAx[1][1].set_title(r"""Inverter 104 Active Power Output""")
+        CurrentAx[0][0].set_title(r"""Inverter 101 P Output""")
+        CurrentAx[1][0].set_title(r"""Inverter 102 P Output""")
+        CurrentAx[0][1].set_title(r"""Inverter 103 P Output""")
+        CurrentAx[1][1].set_title(r"""Inverter 104 P Output""")
 
         save_figure_name = GraphPath + "/" + EventName[i] + ' ' + str(Branch_Outage_List_Start[i]) + '-' + str(
             Branch_Outage_List_End[i]) + '_P.png'
@@ -400,10 +429,10 @@ for i in range(0, len(Branch_Outage_List_Start)):
         mpl.rcParams['legend.fontsize'] = 'small'
 
         CurrentFig, CurrentAx = plt.subplots(2, 2, sharex=False, figsize=(20, 15));
-        CurrentAx[0][0].plot(chandata['time'], 100*q_data_101);
-        CurrentAx[1][0].plot(chandata['time'], 100*q_data_101);
-        CurrentAx[0][1].plot(chandata['time'], 100*q_data_101);
-        CurrentAx[1][1].plot(chandata['time'], 100*q_data_101);
+        CurrentAx[0][0].plot(chandata['time'], q_data_101);
+        CurrentAx[1][0].plot(chandata['time'], q_data_101);
+        CurrentAx[0][1].plot(chandata['time'], q_data_101);
+        CurrentAx[1][1].plot(chandata['time'], q_data_101);
 
         CurrentAx[0][0].tick_params(axis='both', which='both', labelsize=24)
         CurrentAx[1][0].tick_params(axis='both', which='both', labelsize=24)
@@ -430,10 +459,10 @@ for i in range(0, len(Branch_Outage_List_Start)):
         CurrentAx[0][1].set_ylabel(r"""Power/MVR""")
         CurrentAx[1][1].set_ylabel(r"""Power/MVR""")
 
-        CurrentAx[0][0].set_title(r"""Inverter 101 Reactive Power Output""")
-        CurrentAx[1][0].set_title(r"""Inverter 102 Reactive Power Output""")
-        CurrentAx[0][1].set_title(r"""Inverter 103 Reactive Power Output""")
-        CurrentAx[1][1].set_title(r"""Inverter 104 Reactive Power Output""")
+        CurrentAx[0][0].set_title(r"""Inverter 101 Q Output""")
+        CurrentAx[1][0].set_title(r"""Inverter 102 Q Output""")
+        CurrentAx[0][1].set_title(r"""Inverter 103 Q Output""")
+        CurrentAx[1][1].set_title(r"""Inverter 104 Q Output""")
 
         save_figure_name = GraphPath + "/" + EventName[i] + ' ' + str(Branch_Outage_List_Start[i]) + '-' + str(
             Branch_Outage_List_End[i]) + '_Q.png'
