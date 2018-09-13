@@ -27,14 +27,23 @@ S = 100.00   # in MVA
 ActivePowerSetpoint = 1  # in p.u
 #ReactivePowerSetpoint =   # in P.u.
 
-# Set Simulation Path.
-LoadScenario="SummerPeakLoad"
-ClauseName="5.2.5.13 Voltage Setpoint Control_report_1"
-ProgramPath = "C:/NEOEN/P_SimulationScripts/"
-GridInfoPath = "C:/NEOEN/NEM_files/"
-HuaweiModelPath = "C:/NEOEN/Huawei_models/"
+# Set Simulation Path. if on laptop
+# LoadScenario = "SimplifiedSystem"
+# ClauseName = "5.2.5.11 Frequency Response_report"
+# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "C:/NEOEN/NEM_files/"
+# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
+# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+# FigurePath = "C:/NEOEN/R_Results/"
+
+# Set Simulation Path. if on desktop
+LoadScenario = "SimplifiedSystem"
+ClauseName = "5.2.5.11 Frequency Response_report"
+ProgramPath = "F:/NEOEN/P_SimulationScripts/"
+GridInfoPath = "F:/NEOEN/NEM_files/"
+HuaweiModelPath = "F:/NEOEN/Huawei_models/"
 OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-FigurePath = "C:/NEOEN/R_Results/"
+FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
         file_name = "SummerHi-20171219-153047-34-SystemNormal_all_bus_DDSF"
@@ -60,39 +69,61 @@ psspy.addmodellibrary(GridInfoPath + 'SMASC_C135_34_IVF111.dll')
 [ierr, var_inv_con] = psspy.mdlind(101, '1', 'GEN', 'CON')
 [ierr, var_inv_var]= psspy.mdlind(101,'1','GEN','VAR')
 psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [ActivePowerSetpoint * S, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 # psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
 #                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 # psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
 #                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
 #                       _f])
 psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [ActivePowerSetpoint * S, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 # psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
 #                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 # psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
 #                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
 #                       _f])
 psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [ActivePowerSetpoint * S + 5, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 # psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
 #                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 # psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
 #                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
 #                       _f])
 psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [ActivePowerSetpoint * S, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 # psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
 #                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 # psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
 #                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
 #                       _f])
 psspy.fdns([1, 0, 1, 1, 1, 1, 99, 0])
-# psspy.change_plmod_icon(101,r"""1""",r"""GPMPPC""",4,3)
-# psspy.change_plmod_icon(101,r"""1""",r"""HWS2000""",1,2)
-# psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",10, 0.45)
-# psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",28, 20000.)
-# psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",29, 8000.0)
+t_q = 0.569
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, -0.5)
+psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 13, -t_q)
+psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 14, t_q)
+psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 13, -t_q)
+psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 14, t_q)
+psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 13, -t_q)
+psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 14, t_q)
+psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 13, -t_q)
+psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 14, t_q)
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 23, 0.001)  # QV droop deadband
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 24, 0.4)  # QV droop
+psspy.change_plmod_icon(101, r"""1""", r"""GPMPPC""", 4, 2)  # kVar control =0, PF control = 1, Droop Control = 2, Voltage Control = 3
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 10, 1.0)
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 2, 0.02)
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 3, 0.15)
+lvrd_1=0.83
+lvrd_t=0.10
+psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 16, lvrd_1)
+psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 17, lvrd_t)
+psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 16, lvrd_1)
+psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 17, lvrd_t)
+psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 16, lvrd_1)
+psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 17, lvrd_t)
+psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 16, lvrd_1)
+psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 17, lvrd_t)
 
 psspy.dynamics_solution_param_2([_i, _i, _i, _i, _i, _i, _i, _i], [1.000, _f, 0.001, 0.004, _f, _f, _f, _f])
 

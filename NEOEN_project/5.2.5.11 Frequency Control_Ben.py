@@ -21,14 +21,23 @@ _s = psspy.getdefaultchar()
 redirect.psse2py()
 psspy.psseinit(50000)
 
-# Set Simulation Path.
+# Set Simulation Path. if on laptop
+# LoadScenario = "SimplifiedSystem"
+# ClauseName = "5.2.5.11 Frequency Response_report"
+# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "C:/NEOEN/NEM_files/"
+# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
+# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+# FigurePath = "C:/NEOEN/R_Results/"
+
+# Set Simulation Path. if on desktop
 LoadScenario = "SimplifiedSystem"
 ClauseName = "5.2.5.11 Frequency Response_report"
-ProgramPath = "C:/NEOEN/P_SimulationScripts/"
-GridInfoPath = "C:/NEOEN/NEM_files/"
-HuaweiModelPath = "C:/NEOEN/Huawei_models/"
+ProgramPath = "F:/NEOEN/P_SimulationScripts/"
+GridInfoPath = "F:/NEOEN/NEM_files/"
+HuaweiModelPath = "F:/NEOEN/Huawei_models/"
 OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-FigurePath = "C:/NEOEN/R_Results/"
+FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
         file_name = "SummerHi-20171219-153047-34-SystemNormal_all_bus_DDSF"
@@ -131,10 +140,10 @@ for i in range(0, len(Disturbance_Load_Amount)):
     CurrentAx[0][1].tick_params(axis='both', which='both', labelsize=24)
     CurrentAx[1][1].tick_params(axis='both', which='both', labelsize=24)
 
-    CurrentAx[0][0].set_xlim(left=2)
-    CurrentAx[1][0].set_xlim(left=2)
-    CurrentAx[0][1].set_xlim(left=2)
-    CurrentAx[1][1].set_xlim(left=2)
+    CurrentAx[0][0].set_xlim(2, 60)
+    CurrentAx[1][0].set_xlim(2, 60)
+    CurrentAx[0][1].set_xlim(2, 60)
+    CurrentAx[1][1].set_xlim(2, 60)
 
     CurrentAx[0][0].set_ylim([0.8, 1.2])
 
