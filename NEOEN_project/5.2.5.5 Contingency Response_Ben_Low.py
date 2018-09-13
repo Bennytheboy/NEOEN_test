@@ -286,7 +286,7 @@ for i in range(0, len(Branch_Outage_List_Start)):
 
         psspy.run(0, 5.0 + fault_time, 1000, 1, 0)
         psspy.dist_branch_trip(Branch_Outage_List_Start[i], Branch_Outage_List_End[i], '1')
-        psspy.run(0, 30.000, 1000, 1, 0)
+        psspy.run(0, 10.000, 1000, 1, 0)
 
         # start draw curves
         # new folder if necessary
