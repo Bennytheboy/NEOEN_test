@@ -202,8 +202,8 @@ for i in range(0, len(Branch_Outage_List_Start)):
         psspy.bsys(0, 0, [0.4, 500.], 0, [], 0, [], 0, [], 0, [])
         # psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 28, 25000)
         # psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 29, 9000)
-        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 3, 0.001)
-        psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 17, 0.1)
+        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 3, 0.001) #integral gain of reactive power PI controller
+        psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 17, 0.1) #LVRT hysteresis voltage
         psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 17, 0.1)
         psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 17, 0.1)
         psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 17, 0.1)
