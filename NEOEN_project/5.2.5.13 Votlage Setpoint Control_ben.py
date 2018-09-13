@@ -23,27 +23,27 @@ _s = psspy.getdefaultchar()
 redirect.psse2py()
 psspy.psseinit(50000)
 
-S = 100.00   # in MVA
+S = 120.00   # in MVA
 ActivePowerSetpoint = 1  # in p.u
 #ReactivePowerSetpoint =   # in P.u.
 
 # Set Simulation Path. if on laptop
-# LoadScenario = "SimplifiedSystem"
-# ClauseName = "5.2.5.13 Voltage setpoint Control"
-# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
-# GridInfoPath = "C:/NEOEN/NEM_files/"
-# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
-# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-# FigurePath = "C:/NEOEN/R_Results/"
-
-# Set Simulation Path. if on desktop
 LoadScenario = "SummerPeakLoad"
 ClauseName = "5.2.5.13 Voltage setpoint Control"
-ProgramPath = "F:/NEOEN/P_SimulationScripts/"
-GridInfoPath = "F:/NEOEN/NEM_files/"
-HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+ProgramPath = "C:/NEOEN/P_SimulationScripts/"
+GridInfoPath = "C:/NEOEN/NEM_files/"
+HuaweiModelPath = "C:/NEOEN/Huawei_models/"
 OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-FigurePath = "F:/NEOEN/R_Results/"
+FigurePath = "C:/NEOEN/R_Results/"
+
+# Set Simulation Path. if on desktop
+# LoadScenario = "SummerPeakLoad"
+# ClauseName = "5.2.5.13 Voltage setpoint Control"
+# ProgramPath = "F:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "F:/NEOEN/NEM_files/"
+# HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+# FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
         file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
@@ -69,34 +69,15 @@ psspy.addmodellibrary(GridInfoPath + 'SMASC_C135_34_IVF111.dll')
 [ierr, var_inv_con] = psspy.mdlind(101, '1', 'GEN', 'CON')
 [ierr, var_inv_var]= psspy.mdlind(101,'1','GEN','VAR')
 psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-                      _f])
+                     [102, _f, 60, 60, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-                      _f])
+                     [102, _f, 60, 60, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-                      _f])
+                     [102, _f, 60, 60, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-                      _f])
-psspy.fdns([1, 0, 1, 1, 1, 1, 99, 0])
+                     [102, _f, 60, 60, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+
+psspy.fdns([1, 0, 0, 1, 0, 0, 99, 0])
 t_q = 0.569
 psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
 psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, -0.5)
@@ -176,26 +157,32 @@ psspy.bus_frequency_channel([1, 400], r"""System frequency""")
 psspy.voltage_channel([2, -1, -1, 101], r"""Inverter Voltage Mag.""")
 psspy.voltage_channel([3, -1, -1, 400], r"""NEOEN SF POC Voltage Mag.""")
 psspy.branch_p_and_q_channel([4, -1, -1, 400, 46660], r"""1""", [r"""P Injection""", r"""Q Injection"""])
-ierr = psspy.machine_array_channel([7, 2, 101], r"""1""", r"""Pelec 101""")
-ierr = psspy.machine_array_channel([8, 3, 101], r"""1""", r"""Qelec 101""")
-ierr = psspy.machine_array_channel([9, 2, 102], r"""1""", r"""Pelec 102""")
-ierr = psspy.machine_array_channel([10, 3, 102], r"""1""", r"""Qelec 102""")
-ierr = psspy.machine_array_channel([11, 2, 103], r"""1""", r"""Pelec 103""")
-ierr = psspy.machine_array_channel([12, 3, 103], r"""1""", r"""Qelec 103""")
-ierr = psspy.machine_array_channel([13, 2, 104], r"""1""", r"""Pelec 104""")
-ierr = psspy.machine_array_channel([14, 3, 104], r"""1""", r"""Qelec 104""")
+# ierr = psspy.machine_array_channel([7, 2, 101], r"""1""", r"""Pelec 101""")
+# ierr = psspy.machine_array_channel([8, 3, 101], r"""1""", r"""Qelec 101""")
+# ierr = psspy.machine_array_channel([9, 2, 102], r"""1""", r"""Pelec 102""")
+# ierr = psspy.machine_array_channel([10, 3, 102], r"""1""", r"""Qelec 102""")
+# ierr = psspy.machine_array_channel([11, 2, 103], r"""1""", r"""Pelec 103""")
+# ierr = psspy.machine_array_channel([12, 3, 103], r"""1""", r"""Qelec 103""")
+# ierr = psspy.machine_array_channel([13, 2, 104], r"""1""", r"""Pelec 104""")
+# ierr = psspy.machine_array_channel([14, 3, 104], r"""1""", r"""Qelec 104""")
 #ierr = psspy.state_channel([15, var_inv_stt + 6], r"""Inverter Voltage Measurement""")
 psspy.var_channel([15, var_ppc_setp+68],r"""Voltage Setpoint""")
 
 # start simulation
 psspy.strt_2([0, 0], OutputFilePath)
+psspy.run(0, 1, 1000, 1, 0)
+psspy.change_var(var_ppc_setp + 68, 1.065)
+psspy.change_plmod_var(101,r"""1""",r"""GPMPPC""",69, 1.065)
 psspy.run(0, 5, 1000, 1, 0)
 psspy.change_var(var_ppc_setp + 68, 1.03)
-psspy.run(0, 35, 1000, 1, 0)
-psspy.change_var(var_ppc_setp + 68, 1.07)
-psspy.run(0, 65, 1000, 1, 0)
-# psspy.change_var(var_ppc_setp + 68, 1.06)
-# psspy.run(0, 100, 1000, 1, 0)
+psspy.change_plmod_var(101,r"""1""",r"""GPMPPC""",69, 1.03)
+# psspy.change_plmod_var(101,r"""1""",r"""GPMPPC""",11, 400)
+# psspy.change_plmod_var(101,r"""1""",r"""GPMPPC""",69, 1.02)
+psspy.run(0, 15, 1000, 1, 0)
+# psspy.change_plmod_var(101,r"""1""",r"""GPMPPC""",69, 1.03)
+# psspy.run(0, 65, 1000, 1, 0)
+# # psspy.change_var(var_ppc_setp + 68, 1.06)
+# # psspy.run(0, 100, 1000, 1, 0)
 
 # start draw curves
 # new folder if necessary
@@ -244,7 +231,7 @@ CurrentAx[1][1].set_xlim([0, 120])
 
 CurrentAx[0][0].set_ylim([0.85, 1.2])
 CurrentAx[1][0].set_ylim([1.0, 1.1])
-CurrentAx[0][1].set_ylim([300, 500])
+CurrentAx[0][1].set_ylim([0, 500])
 CurrentAx[1][1].set_ylim([-500, 500])
 
 CurrentAx[0][0].set_xlabel(r"""Time/s""")
@@ -258,9 +245,9 @@ CurrentAx[0][1].set_ylabel(r"""Power/MW""")
 CurrentAx[1][1].set_ylabel(r"""Power/MVar""")
 
 CurrentAx[0][0].legend(["Inverter Terminal Voltage"])
-CurrentAx[1][0].legend(["Metz SF PoC Voltage"])
-CurrentAx[0][1].legend(["Metz SF Active Power Output"], loc='upper center')
-CurrentAx[1][1].legend(["Metz SF Reactive Power Output"])
+CurrentAx[1][0].legend(["WDSF PoC Voltage"])
+CurrentAx[0][1].legend(["WDSF Active Power Output"], loc='upper center')
+CurrentAx[1][1].legend(["WDSF Reactive Power Output"])
 
 save_figure_name = GraphPath + "/" + '5% Step Change.png'
 CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
