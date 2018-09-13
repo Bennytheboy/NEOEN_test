@@ -63,39 +63,35 @@ psspy.addmodellibrary(HuaweiModelPath + 'MOD_GPM_SB_V7.dll')
 psspy.addmodellibrary(GridInfoPath + 'GEWTG34.dll')
 psspy.addmodellibrary(GridInfoPath + 'SMAPPC_B111_34_IVF111.dll')
 psspy.addmodellibrary(GridInfoPath + 'SMASC_C135_34_IVF111.dll')
-[ierr, var_ppc_conp] = psspy.mdlind(101, '1', 'EXC', 'CON')
-[ierr, var_ppc_setp] = psspy.mdlind(101, '1', 'EXC', 'VAR')
-[ierr, var_ppc_mode] = psspy.mdlind(101, '1', 'EXC', 'ICON')
-[ierr, var_inv_con] = psspy.mdlind(101, '1', 'GEN', 'CON')
-[ierr, var_inv_var]= psspy.mdlind(101,'1','GEN','VAR')
-psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-                      _f])
-psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-                      _f])
-psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-                      _f])
-psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-                      _f])
+
+# psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+# psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+# psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+#                       _f])
+# psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+# psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+# psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+#                       _f])
+# psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+# psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+# psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+#                       _f])
+# psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+# psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+# psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
+#                      [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+#                       _f])
 psspy.fdns([1, 0, 1, 1, 1, 1, 99, 0])
 t_q = 0.569
 psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
@@ -110,7 +106,7 @@ psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 13, -t_q)
 psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 14, t_q)
 psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 23, 0.001)  # QV droop deadband
 psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 24, 0.4)  # QV droop
-psspy.change_plmod_icon(101, r"""1""", r"""GPMPPC""", 4, 2)  # kVar control =0, PF control = 1, Droop Control = 2, Voltage Control = 3
+psspy.change_plmod_icon(101, r"""1""", r"""GPMPPC""", 4, 3)  # kVar control =0, PF control = 1, Droop Control = 2, Voltage Control = 3
 psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 10, 1.0)
 psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 2, 0.02)
 psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 3, 0.15)
@@ -176,24 +172,26 @@ psspy.bus_frequency_channel([1, 400], r"""System frequency""")
 psspy.voltage_channel([2, -1, -1, 101], r"""Inverter Voltage Mag.""")
 psspy.voltage_channel([3, -1, -1, 400], r"""NEOEN SF POC Voltage Mag.""")
 psspy.branch_p_and_q_channel([4, -1, -1, 400, 46660], r"""1""", [r"""P Injection""", r"""Q Injection"""])
-ierr = psspy.machine_array_channel([7, 2, 101], r"""1""", r"""Pelec 101""")
-ierr = psspy.machine_array_channel([8, 3, 101], r"""1""", r"""Qelec 101""")
-ierr = psspy.machine_array_channel([9, 2, 102], r"""1""", r"""Pelec 102""")
-ierr = psspy.machine_array_channel([10, 3, 102], r"""1""", r"""Qelec 102""")
-ierr = psspy.machine_array_channel([11, 2, 103], r"""1""", r"""Pelec 103""")
-ierr = psspy.machine_array_channel([12, 3, 103], r"""1""", r"""Qelec 103""")
-ierr = psspy.machine_array_channel([13, 2, 104], r"""1""", r"""Pelec 104""")
-ierr = psspy.machine_array_channel([14, 3, 104], r"""1""", r"""Qelec 104""")
+psspy.var_channel([6, var_ppc_setp+68],r"""Voltage Setpoint""")
+# ierr = psspy.machine_array_channel([7, 2, 101], r"""1""", r"""Pelec 101""")
+# ierr = psspy.machine_array_channel([8, 3, 101], r"""1""", r"""Qelec 101""")
+# ierr = psspy.machine_array_channel([9, 2, 102], r"""1""", r"""Pelec 102""")
+# ierr = psspy.machine_array_channel([10, 3, 102], r"""1""", r"""Qelec 102""")
+# ierr = psspy.machine_array_channel([11, 2, 103], r"""1""", r"""Pelec 103""")
+# ierr = psspy.machine_array_channel([12, 3, 103], r"""1""", r"""Qelec 103""")
+# ierr = psspy.machine_array_channel([13, 2, 104], r"""1""", r"""Pelec 104""")
+# ierr = psspy.machine_array_channel([14, 3, 104], r"""1""", r"""Qelec 104""")
 #ierr = psspy.state_channel([15, var_inv_stt + 6], r"""Inverter Voltage Measurement""")
 psspy.var_channel([15, var_ppc_setp+68],r"""Voltage Setpoint""")
 
 # start simulation
 psspy.strt_2([0, 0], OutputFilePath)
 psspy.run(0, 5, 1000, 1, 0)
-psspy.change_var(var_ppc_setp + 68, 1.03)
-psspy.run(0, 35, 1000, 1, 0)
-psspy.change_var(var_ppc_setp + 68, 1.07)
-psspy.run(0, 65, 1000, 1, 0)
+# psspy.change_var(var_ppc_setp + 68, 1.03)
+psspy.change_plmod_var(101,r"""1""",r"""GPMPPC""",69, 1.03)
+psspy.run(0, 10, 1000, 1, 0)
+# psspy.change_var(var_ppc_setp + 68, 1.07)
+# psspy.run(0, 65, 1000, 1, 0)
 # psspy.change_var(var_ppc_setp + 68, 1.06)
 # psspy.run(0, 100, 1000, 1, 0)
 
