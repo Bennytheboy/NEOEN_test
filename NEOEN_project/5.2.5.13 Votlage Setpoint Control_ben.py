@@ -29,7 +29,7 @@ ActivePowerSetpoint = 1  # in p.u
 
 # Set Simulation Path. if on laptop
 # LoadScenario = "SimplifiedSystem"
-# ClauseName = "5.2.5.11 Frequency Response_report"
+# ClauseName = "5.2.5.13 Voltage setpoint Control"
 # ProgramPath = "C:/NEOEN/P_SimulationScripts/"
 # GridInfoPath = "C:/NEOEN/NEM_files/"
 # HuaweiModelPath = "C:/NEOEN/Huawei_models/"
@@ -37,8 +37,8 @@ ActivePowerSetpoint = 1  # in p.u
 # FigurePath = "C:/NEOEN/R_Results/"
 
 # Set Simulation Path. if on desktop
-LoadScenario = "SimplifiedSystem"
-ClauseName = "5.2.5.11 Frequency Response_report"
+LoadScenario = "SummerPeakLoad"
+ClauseName = "5.2.5.13 Voltage setpoint Control"
 ProgramPath = "F:/NEOEN/P_SimulationScripts/"
 GridInfoPath = "F:/NEOEN/NEM_files/"
 HuaweiModelPath = "F:/NEOEN/Huawei_models/"
@@ -46,9 +46,9 @@ OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
 FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
-        file_name = "SummerHi-20171219-153047-34-SystemNormal_all_bus_DDSF"
+        file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
 if LoadScenario == "SummerLowLoad":
-        file_name = "SummerLo-20171226-043047-34-SystemNormal_all_bus_DDSF"
+        file_name = "SummerLo-20171226-043047-34-SystemNormal_all"
 if LoadScenario == "SimplifiedSystem":
         file_name = "NEOEN Western Downs Solar Farm_C3WV_mod"
 
@@ -70,32 +70,32 @@ psspy.addmodellibrary(GridInfoPath + 'SMASC_C135_34_IVF111.dll')
 [ierr, var_inv_var]= psspy.mdlind(101,'1','GEN','VAR')
 psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
                      [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-#                       _f])
+psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
+                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
+                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+                      _f])
 psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
                      [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-#                       _f])
+psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
+                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
+                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+                      _f])
 psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
                      [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-#                       _f])
+psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
+                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
+                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+                      _f])
 psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
                      [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-#                       _f])
+psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
+                     [_f, _f, 60, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
+                     [_f, _f, _f, 60, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+                      _f])
 psspy.fdns([1, 0, 1, 1, 1, 1, 99, 0])
 t_q = 0.569
 psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
@@ -185,17 +185,17 @@ ierr = psspy.machine_array_channel([12, 3, 103], r"""1""", r"""Qelec 103""")
 ierr = psspy.machine_array_channel([13, 2, 104], r"""1""", r"""Pelec 104""")
 ierr = psspy.machine_array_channel([14, 3, 104], r"""1""", r"""Qelec 104""")
 #ierr = psspy.state_channel([15, var_inv_stt + 6], r"""Inverter Voltage Measurement""")
-psspy.var_channel([15,var_ppc_setp+68],r"""Voltage Setpoint""")
+psspy.var_channel([15, var_ppc_setp+68],r"""Voltage Setpoint""")
 
 # start simulation
 psspy.strt_2([0, 0], OutputFilePath)
 psspy.run(0, 5, 1000, 1, 0)
-psspy.change_var(var_ppc_setp + 68, 1.06)
-psspy.run(0, 35, 1000, 1, 0)
 psspy.change_var(var_ppc_setp + 68, 1.03)
+psspy.run(0, 35, 1000, 1, 0)
+psspy.change_var(var_ppc_setp + 68, 1.07)
 psspy.run(0, 65, 1000, 1, 0)
-psspy.change_var(var_ppc_setp + 68, 1.06)
-psspy.run(0, 100, 1000, 1, 0)
+# psspy.change_var(var_ppc_setp + 68, 1.06)
+# psspy.run(0, 100, 1000, 1, 0)
 
 # start draw curves
 # new folder if necessary
