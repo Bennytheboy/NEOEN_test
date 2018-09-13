@@ -25,19 +25,28 @@ psspy.psseinit(50000)
 S = 100.00   # in MVA
 ActivePowerSetpoint = 1  # in p.u
 
-# Set Simulation Path.
+# Set Simulation Path.  laptop
+# LoadScenario="SummerPeakLoad"
+# ClauseName="5.2.5.14 Active Power Control_Ramp_8"
+# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "C:/NEOEN/NEM_files/"
+# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
+# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+# FigurePath = "C:/NEOEN/R_Results/"
+
+# desktop
 LoadScenario="SummerPeakLoad"
 ClauseName="5.2.5.14 Active Power Control_Ramp_8"
-ProgramPath = "C:/NEOEN/P_SimulationScripts/"
-GridInfoPath = "C:/NEOEN/NEM_files/"
-HuaweiModelPath = "C:/NEOEN/Huawei_models/"
+ProgramPath = "F:/NEOEN/P_SimulationScripts/"
+GridInfoPath = "F:/NEOEN/NEM_files/"
+HuaweiModelPath = "F:/NEOEN/Huawei_models/"
 OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-FigurePath = "C:/NEOEN/R_Results/"
+FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
-        file_name = "SummerHi-20171219-153047-34-SystemNormal_all_bus_DDSF"
+        file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
 if LoadScenario == "SummerLowLoad":
-        file_name = "SummerLo-20171226-043047-34-SystemNormal_all_bus_DDSF"
+        file_name = "SummerLo-20171226-043047-34-SystemNormal_all"
 if LoadScenario == "SimplifiedSystem":
         file_name = "NEOEN Western Downs Solar Farm_C3WV_mod"
 
