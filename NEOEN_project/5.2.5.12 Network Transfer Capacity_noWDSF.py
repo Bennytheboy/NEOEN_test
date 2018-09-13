@@ -26,7 +26,8 @@ _s = psspy.getdefaultchar()
 redirect.psse2py()
 psspy.psseinit(50000)
 
-LoadScenario = "SummerPeakLoad"
+# if run on laptop
+LoadScenario = "SummerPeakLoad_No_WDSF"
 ClauseName = "5.2.5.12 Impact on Network Capability"
 ProgramPath = "C:/NEOEN/P_SimulationScripts/"
 GridInfoPath = "C:/NEOEN/NEM_files/" + LoadScenario + "/"
@@ -38,7 +39,7 @@ FigurePath = "C:/NEOEN/R_Results/" + ClauseName + "/"
 # if run ond desktop
 # Set Simulation Path.  # CHANG: change path according to PC
 # today = date.today()
-# LoadScenario = "SummerPeakLoad"
+# LoadScenario = "SummerPeakLoad_No_WDSF"
 # ClauseName = "5.2.5.12 Impact on Network Capability"
 # ProgramPath = "F:/NEOEN/P_SimulationScripts/"
 # GridInfoPath = "F:/NEOEN/NEM_files/" + LoadScenario + "/"
@@ -46,13 +47,15 @@ FigurePath = "C:/NEOEN/R_Results/" + ClauseName + "/"
 # OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
 # FigurePath = "F:/NEOEN/R_Results/" + ClauseName + "/"
 
-
 if LoadScenario == "SummerPeakLoad":
         file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
 if LoadScenario == "SummerLowLoad":
         file_name = "SummerLo-20171226-043047-34-SystemNormal_all"
 if LoadScenario == "SimplifiedSystem":
         file_name = "NEOEN Western Downs Solar Farm_C3WV_mod"
+if LoadScenario == "SummerPeakLoad_No_WDSF":
+        file_name = "SummerHi-20171219-153047-34-SystemNormal_No_WDSF"
+
 
 #########################################   Read Input List #######################################
 Bus_Nam = []
@@ -135,7 +138,7 @@ P_Flow_Record = [[] for i in range(len(Power_Flow_Monitor_Start))];
 S_Flow_Record = [[] for i in range(len(Power_Flow_Monitor_Start))];
 Event_Name = [];
 P_setpoint = [0, 100, 50, 0]  # CHANG: change this value according to your suggestion from 5.2.5.1 Reactive Power Capability
-Q_max_setpoint = [0, 40, 40, 40]  # CHANG: sample : change this value according to your suggestion from 5.2.5.1 Reactive Power Capability
+Q_max_setpoint = [0, 60, 60, 60]  # CHANG: sample : change this value according to your suggestion from 5.2.5.1 Reactive Power Capability
 Q_min_setpoint = [0, -40, -40, -40]  # CHANG: sample :change this value according to your suggestion from 5.2.5.1 Reactive Power Capability
 InverterCapacity = 120  # CHANG: sample :change this value according to your suggestion from 5.2.5.1 Reactive Power Capability
 
@@ -219,18 +222,18 @@ for i in range(0, len(Fault_Equipment_Start)):
     psspy.read(0, GridInfoPath + file_name)
     ##        psspy.dscn(20022)   # eliminate negative generation
 
-    psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                         [P_setpoint, 0, Q_max_setpoint, Q_min_setpoint, InverterCapacity, 0, _f, _f, _f, _f, _f, _f,
-                          _f, _f, _f, _f, _f])
-    psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                         [P_setpoint, 0, Q_max_setpoint, Q_min_setpoint, InverterCapacity, 0, _f, _f, _f, _f, _f, _f,
-                          _f, _f, _f, _f, _f])
-    psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                         [P_setpoint, 0, Q_max_setpoint, Q_min_setpoint, InverterCapacity, 0, _f, _f, _f, _f, _f, _f,
-                          _f, _f, _f, _f, _f])
-    psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                         [P_setpoint, 0, Q_max_setpoint, Q_min_setpoint, InverterCapacity, 0, _f, _f, _f, _f, _f, _f,
-                          _f, _f, _f, _f, _f])
+    # psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
+    #                      [P_setpoint, 0, Q_max_setpoint, Q_min_setpoint, InverterCapacity, 0, _f, _f, _f, _f, _f, _f,
+    #                       _f, _f, _f, _f, _f])
+    # psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
+    #                      [P_setpoint, 0, Q_max_setpoint, Q_min_setpoint, InverterCapacity, 0, _f, _f, _f, _f, _f, _f,
+    #                       _f, _f, _f, _f, _f])
+    # psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
+    #                      [P_setpoint, 0, Q_max_setpoint, Q_min_setpoint, InverterCapacity, 0, _f, _f, _f, _f, _f, _f,
+    #                       _f, _f, _f, _f, _f])
+    # psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
+    #                      [P_setpoint, 0, Q_max_setpoint, Q_min_setpoint, InverterCapacity, 0, _f, _f, _f, _f, _f, _f,
+    #                       _f, _f, _f, _f, _f])
 
     #psspy.fdns([1, 0, 0, 1, 1, 1, 99, 0])
     psspy.fdns([1, 0, 1, 1, 1, 1, 99, 0])
@@ -332,7 +335,7 @@ for i in range(0, len(Fault_Equipment_Start)):
         Voltage_PU_Record[k].append(rval);
 
     #########################################   Write Result To Files #######################################
-ResultFile = open(FigurePath + 'VoltageMonitor.csv', 'w');
+ResultFile = open(FigurePath + 'VoltageMonitor_NS.csv', 'w');
 ResultFile.write('Event \ Bus ' + ',')
 for i in range(0, len(Bus_Nam)):
     ResultFile.write(Bus_Nam[i] + ',')
@@ -346,7 +349,7 @@ for i in range(0, len(Voltage_PU_Record[0])):
 ResultFile.close()
 
 ### Write Power Flow - P Result
-ResultFile = open(FigurePath + 'P_MW_Monitor.csv', 'w');
+ResultFile = open(FigurePath + 'P_MW_Monitor_NS.csv', 'w');
 ResultFile.write('Event \ Branch' + ',')
 for i in range(0, len(Power_Flow_Monitor_Start)):
     if Power_Flow_Monitor_Type[i] == 'SH' or Power_Flow_Monitor_Type[i] == 'QL' or Power_Flow_Monitor_Type[i] == 'GE':
@@ -365,7 +368,7 @@ for i in range(0, len(P_Flow_Record[0])):
 ResultFile.close()
 
 ##### Write Power Flow - Percentage Result
-ResultFile = open(FigurePath + 'S_Pct_Monitor.csv', 'w');
+ResultFile = open(FigurePath + 'S_Pct_Monitor_NS.csv', 'w');
 ResultFile.write('Event \ Branch ' + ',')
 for i in range(0, len(Power_Flow_Monitor_Start)):
     if Power_Flow_Monitor_Type[i] == 'SH' or Power_Flow_Monitor_Type[i] == 'QL' or Power_Flow_Monitor_Type[i] == 'GE':
