@@ -37,11 +37,11 @@ FigurePath = "C:/NEOEN/R_Results/"
 # if on desktop
 # LoadScenario = "SummerPeakLoad"
 # ClauseName = "5.2.5.5 Contingency Response"
-# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
-# GridInfoPath = "C:/NEOEN/NEM_files/"
-# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
+# ProgramPath = "F:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "F:/NEOEN/NEM_files/"
+# HuaweiModelPath = "F:/NEOEN/Huawei_models/"
 # OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-# FigurePath = "C:/NEOEN/R_Results/"
+# FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
     file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
