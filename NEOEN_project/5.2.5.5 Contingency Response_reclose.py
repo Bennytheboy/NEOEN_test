@@ -26,25 +26,25 @@ psspy.psseinit(50000)
 
 # Set Simulation Path.
 # if on laptop
-LoadScenario = "SummerPeakLoad"
-ClauseName = "5.2.5.5 Contingency Response_reclose"
-ProgramPath = "C:/NEOEN/P_SimulationScripts/"
-GridInfoPath = "C:/NEOEN/NEM_files/"
-HuaweiModelPath = "C:/NEOEN/Huawei_models/"
-OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-FigurePath = "C:/NEOEN/R_Results/"
+# LoadScenario = "SummerPeakLoad"
+# ClauseName = "5.2.5.5 Contingency Response_reclose"
+# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "C:/NEOEN/NEM_files/"
+# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
+# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+# FigurePath = "C:/NEOEN/R_Results/"
 
 # if on desktop
-# LoadScenario = "SummerPeakLoad"
-# ClauseName = "5.2.5.5 Contingency Response"
-# ProgramPath = "F:/NEOEN/P_SimulationScripts/"
-# GridInfoPath = "F:/NEOEN/NEM_files/"
-# HuaweiModelPath = "F:/NEOEN/Huawei_models/"
-# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-# FigurePath = "F:/NEOEN/R_Results/"
+LoadScenario = "SummerPeakLoad"
+ClauseName = "5.2.5.5 Contingency Response_reclose"
+ProgramPath = "F:/NEOEN/P_SimulationScripts/"
+GridInfoPath = "F:/NEOEN/NEM_files/"
+HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
-    file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
+    file_name = "SummerHi-20171219-153047-34-SystemNormal_all_laptop"
 if LoadScenario == "SummerLowLoad":
     file_name = "SummerLo-20171226-043047-34-SystemNormal_all"
 if LoadScenario == "SimplifiedSystem":
@@ -231,7 +231,7 @@ CurrentAx[1][0].legend(['WDSF PoC Voltage'])
 CurrentAx[0][1].legend(['Inverter P Output'])
 CurrentAx[1][1].legend(['Inverter Q Output'])
 
-save_figure_name = GraphPath + "/" + '46660_46523Reclose_3ph' + '.png'
+save_figure_name = GraphPath + "/" + '46660_46523_Reclose_3ph' + '.png'
 CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
 plt.close(CurrentFig)
 
