@@ -26,22 +26,22 @@ S = 100.00   # in MVA
 ActivePowerSetpoint = 1  # in p.u
 
 # Set Simulation Path.  laptop
-# LoadScenario="SummerPeakLoad"
-# ClauseName="5.2.5.14 Active Power Control_Ramp_8"
-# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
-# GridInfoPath = "C:/NEOEN/NEM_files/"
-# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
-# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-# FigurePath = "C:/NEOEN/R_Results/"
-
-# desktop
 LoadScenario="SummerPeakLoad"
 ClauseName="5.2.5.14 Active Power Control_Ramp_8"
-ProgramPath = "F:/NEOEN/P_SimulationScripts/"
-GridInfoPath = "F:/NEOEN/NEM_files/"
-HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+ProgramPath = "C:/NEOEN/P_SimulationScripts/"
+GridInfoPath = "C:/NEOEN/NEM_files/"
+HuaweiModelPath = "C:/NEOEN/Huawei_models/"
 OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-FigurePath = "F:/NEOEN/R_Results/"
+FigurePath = "C:/NEOEN/R_Results/"
+
+# desktop
+# LoadScenario="SummerPeakLoad"
+# ClauseName="5.2.5.14 Active Power Control_Ramp_8"
+# ProgramPath = "F:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "F:/NEOEN/NEM_files/"
+# HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+# FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
         file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
@@ -150,7 +150,8 @@ psspy.fact()
 psspy.tysl(0)
 psspy.bsys(0,0,[ 0.4, 500.],0,[],0,[],0,[],0,[])
 
-psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",16, 8.0)
+psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",16, 2.0)
+psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",16, 2.0)
 psspy.change_plmod_icon(101,r"""1""",r"""GPMPPC""",10,1)
 
 

@@ -132,7 +132,7 @@ psspy.addmodellibrary(GridInfoPath + 'SMASC_C135_34_IVF111.dll')
 psspy.dynamics_solution_param_2([_i, _i, _i, _i, _i, _i, _i, _i], [1.000, _f, 0.001, 0.004, _f, _f, _f, _f])
 
 for i in range(0, len(Branch_Outage_List_Start)):
-    for fault_type in range(1, 5):
+    for fault_type in [1]:
 
         # re - initialize
         psspy.read(0, GridInfoPath + LoadScenario + "/" + file_name + ".raw")
@@ -164,7 +164,7 @@ for i in range(0, len(Branch_Outage_List_Start)):
         psspy.fdns([1, 0, 0, 1, 0, 0, 99, 0])
         t_q = 0.569
         psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
-        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, -0.5)
+        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 6, -0.5)
         psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 13, -t_q)
         psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 14, t_q)
         psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 13, -t_q)
@@ -305,6 +305,7 @@ for i in range(0, len(Branch_Outage_List_Start)):
         mpl.rcParams['lines.linewidth'] = 3.0
 
         mpl.rcParams['legend.fancybox'] = True
+        mpl.rcParams['legend.loc'] = 'upper right'
         mpl.rcParams['legend.numpoints'] = 3
         mpl.rcParams['legend.fontsize'] = 'small'
 
@@ -339,10 +340,10 @@ for i in range(0, len(Branch_Outage_List_Start)):
         CurrentAx[0][1].set_ylabel(r"""Power/MW""")
         CurrentAx[1][1].set_ylabel(r"""Power/MVar""")
 
-        CurrentAx[0][0].set_title(r"""Inverter Terminal Voltage""")
-        CurrentAx[1][0].set_title(r"""WDSF PoC Voltage""")
-        CurrentAx[0][1].set_title(r"""WDSF Active Power Output""")
-        CurrentAx[1][1].set_title(r"""WDSF Reactive Power Output""")
+        CurrentAx[0][0].legend([r"""Inverter Terminal Voltage"""])
+        CurrentAx[1][0].legend([r"""WDSF PoC Voltage"""])
+        CurrentAx[0][1].legend([r"""WDSF Active Power Output"""])
+        CurrentAx[1][1].legend([r"""WDSF Reactive Power Output"""])
 
         save_figure_name = GraphPath + "/" + EventName[i] + ' ' + str(Branch_Outage_List_Start[i]) + '-' + str(
             Branch_Outage_List_End[i]) + '.png'
@@ -367,6 +368,7 @@ for i in range(0, len(Branch_Outage_List_Start)):
         mpl.rcParams['legend.fancybox'] = True
         mpl.rcParams['legend.numpoints'] = 3
         mpl.rcParams['legend.fontsize'] = 'small'
+        mpl.rcParams['legend.loc'] = 'upper right'
 
         CurrentFig, CurrentAx = plt.subplots(2, 2, sharex=False, figsize=(20, 15));
         CurrentAx[0][0].plot(chandata['time'], p_data_101)
@@ -399,10 +401,10 @@ for i in range(0, len(Branch_Outage_List_Start)):
         CurrentAx[0][1].set_ylabel(r"""Power/MW""")
         CurrentAx[1][1].set_ylabel(r"""Power/MW""")
 
-        CurrentAx[0][0].set_title(r"""Inverter 101 P Output""")
-        CurrentAx[1][0].set_title(r"""Inverter 102 P Output""")
-        CurrentAx[0][1].set_title(r"""Inverter 103 P Output""")
-        CurrentAx[1][1].set_title(r"""Inverter 104 P Output""")
+        CurrentAx[0][0].legend([r"""Inverter 101 P Output"""])
+        CurrentAx[1][0].legend([r"""Inverter 102 P Output"""])
+        CurrentAx[0][1].legend([r"""Inverter 103 P Output"""])
+        CurrentAx[1][1].legend([r"""Inverter 104 P Output"""])
 
         save_figure_name = GraphPath + "/" + EventName[i] + ' ' + str(Branch_Outage_List_Start[i]) + '-' + str(
             Branch_Outage_List_End[i]) + '_P.png'
@@ -427,6 +429,7 @@ for i in range(0, len(Branch_Outage_List_Start)):
         mpl.rcParams['legend.fancybox'] = True
         mpl.rcParams['legend.numpoints'] = 3
         mpl.rcParams['legend.fontsize'] = 'small'
+        mpl.rcParams['legend.loc'] = 'upper right'
 
         CurrentFig, CurrentAx = plt.subplots(2, 2, sharex=False, figsize=(20, 15));
         CurrentAx[0][0].plot(chandata['time'], q_data_101);
@@ -459,10 +462,10 @@ for i in range(0, len(Branch_Outage_List_Start)):
         CurrentAx[0][1].set_ylabel(r"""Power/MVR""")
         CurrentAx[1][1].set_ylabel(r"""Power/MVR""")
 
-        CurrentAx[0][0].set_title(r"""Inverter 101 Q Output""")
-        CurrentAx[1][0].set_title(r"""Inverter 102 Q Output""")
-        CurrentAx[0][1].set_title(r"""Inverter 103 Q Output""")
-        CurrentAx[1][1].set_title(r"""Inverter 104 Q Output""")
+        CurrentAx[0][0].legend([r"""Inverter 101 Q Output"""])
+        CurrentAx[1][0].legend([r"""Inverter 102 Q Output"""])
+        CurrentAx[0][1].legend([r"""Inverter 103 Q Output"""])
+        CurrentAx[1][1].legend([r"""Inverter 104 Q Output"""])
 
         save_figure_name = GraphPath + "/" + EventName[i] + ' ' + str(Branch_Outage_List_Start[i]) + '-' + str(
             Branch_Outage_List_End[i]) + '_Q.png'

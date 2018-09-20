@@ -26,22 +26,22 @@ S = 100.00   # in MVA
 ActivePowerSetpoint = 1  # in p.u
 
 # Set Simulation Path.  laptop
-# LoadScenario="SummerPeakLoad"
-# ClauseName="5.2.5.14 Active Power Control_Ramp_8"
-# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
-# GridInfoPath = "C:/NEOEN/NEM_files/"
-# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
-# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-# FigurePath = "C:/NEOEN/R_Results/"
-
-# desktop
 LoadScenario="SummerPeakLoad"
 ClauseName="5.2.5.2  quality of electricity generated"
-ProgramPath = "F:/NEOEN/P_SimulationScripts/"
-GridInfoPath = "F:/NEOEN/NEM_files/"
-HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+ProgramPath = "C:/NEOEN/P_SimulationScripts/"
+GridInfoPath = "C:/NEOEN/NEM_files/"
+HuaweiModelPath = "C:/NEOEN/Huawei_models/"
 OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-FigurePath = "F:/NEOEN/R_Results/"
+FigurePath = "C:/NEOEN/R_Results/"
+
+# desktop
+# LoadScenario="SummerPeakLoad"
+# ClauseName="5.2.5.2  quality of electricity generated"
+# ProgramPath = "F:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "F:/NEOEN/NEM_files/"
+# HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+# OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+# FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
         file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
@@ -76,28 +76,13 @@ psspy.machine_data_2(30531,r"""12""",[0,_i,_i,_i,_i,_i],[_f,_f,_f,_f,_f,_f,_f,_f
 psspy.machine_data_2(37530,r"""12""",[0,_i,_i,_i,_i,_i],[_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f])
 
 psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-#                       _f])
+                     [100, _f, 60, -40, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-#                       _f])
+                     [100, _f, 60, -40, 120, _f,120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100 , _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, ReactivePowerSetpoint * S, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-# psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-#                      [_f, _f, _f, ReactivePowerSetpoint * S, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
-#                       _f])
+                     [100, _f, 60, -40, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                     [100, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                     [100, _f, 60, -40, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
 
 psspy.fdns([1,0,0,1,0,0,99,0])
 psspy.plmod_status(30531,r"""1""",1,0)
@@ -147,15 +132,32 @@ psspy.bsys(0,0,[ 0.4, 500.],0,[],0,[],0,[],0,[])
 
 psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",16, 8.0)
 psspy.change_plmod_icon(101,r"""1""",r"""GPMPPC""",10,1)
-
+# t_q = 0.569
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.35)  #Do not use
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 6, -0.4)   #Do not use
+# psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 13, -t_q)
+# psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 14, t_q)
+# psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 13, -t_q)
+# psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 14, t_q)
+# psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 13, -t_q)
+# psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 14, t_q)
+# psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 13, -t_q)
+# psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 14, t_q)
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 23, 0.001)  # QV droop deadband
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 24, 0.4)  # QV droop
+psspy.change_plmod_icon(101, r"""1""", r"""GPMPPC""", 4, 2)  # kVar control =0, PF control = 1, Droop Control = 2, Voltage Control = 3
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 10, 1.0)
+psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 16, 5)
+psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 17, 5)
 
 # start simulation
 psspy.strt_2([0, 0], OutputFilePath)
 psspy.run(0, 1, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+10,400)
+# psspy.change_var(var_ppc_setp+10,400)
 #psspy.change_var(var_ppc_setp+11,0)
-psspy.run(0, 10, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+10,100)
+psspy.run(0, 5, 1000,  1, 0)
+# psspy.change_var(var_ppc_setp+10,200)
+psspy.change_plmod_var(101,r"""1""",r"""GPMPPC""",11, 200)
 psspy.run(0, 20, 1000,  1, 0)
 
 
@@ -210,8 +212,8 @@ CurrentAx[1][1].set_xlim(left=0)
 
 CurrentAx[0][0].set_ylim([0, 1.5])
 CurrentAx[1][0].set_ylim([0, 1.5])
-CurrentAx[0][1].set_ylim([-5, 120])
-CurrentAx[1][1].set_ylim([-50, 100])
+CurrentAx[0][1].set_ylim([-5, 500])
+CurrentAx[1][1].set_ylim([-300, 300])
 
 CurrentAx[0][0].set_xlabel(r"""Time/s""")
 CurrentAx[1][0].set_xlabel(r"""Time/s""")
@@ -225,8 +227,8 @@ CurrentAx[1][1].set_ylabel(r"""Power/MVar""")
 
 CurrentAx[0][0].legend(['Inverter Terminal Voltage'])
 CurrentAx[1][0].legend(['WDSF PoC Voltage'])
-CurrentAx[0][1].legend(['Inverter P Output'])
-CurrentAx[1][1].legend(['Inverter Q Output'])
+CurrentAx[0][1].legend(['WDSF P Output'])
+CurrentAx[1][1].legend(['WDSF Q Output'])
 
 save_figure_name=GraphPath+'/'+'Active Power Control.png'
 CurrentFig.savefig(save_figure_name,format='png',dpi=150,bbox_inches='tight')

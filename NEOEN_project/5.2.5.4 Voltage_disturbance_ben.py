@@ -124,7 +124,7 @@ for i in range(0, len(ActivePowerSetpoint)):
             # tune the controllers
             t_q=0.569
             psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
-            psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, -0.5)
+            psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 6, -0.5)
             psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 13, -t_q)
             psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 14, t_q)
             psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 13, -t_q)
