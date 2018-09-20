@@ -26,22 +26,22 @@ S = 100.00   # in MVA
 ActivePowerSetpoint = 1  # in p.u
 
 # Set Simulation Path.  laptop
-LoadScenario="SummerPeakLoad"
-ClauseName="5.2.5.14 Active Power Control_Ramp_8"
-ProgramPath = "C:/NEOEN/P_SimulationScripts/"
-GridInfoPath = "C:/NEOEN/NEM_files/"
-HuaweiModelPath = "C:/NEOEN/Huawei_models/"
-OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-FigurePath = "C:/NEOEN/R_Results/"
-
-# desktop
 # LoadScenario="SummerPeakLoad"
 # ClauseName="5.2.5.14 Active Power Control_Ramp_8"
-# ProgramPath = "F:/NEOEN/P_SimulationScripts/"
-# GridInfoPath = "F:/NEOEN/NEM_files/"
-# HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "C:/NEOEN/NEM_files/"
+# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
 # OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-# FigurePath = "F:/NEOEN/R_Results/"
+# FigurePath = "C:/NEOEN/R_Results/"
+
+# desktop
+LoadScenario="SummerPeakLoad"
+ClauseName="5.2.5.14 Active Power Control_Ramp_8"
+ProgramPath = "F:/NEOEN/P_SimulationScripts/"
+GridInfoPath = "F:/NEOEN/NEM_files/"
+HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
         file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
@@ -150,8 +150,8 @@ psspy.fact()
 psspy.tysl(0)
 psspy.bsys(0,0,[ 0.4, 500.],0,[],0,[],0,[],0,[])
 
-psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",16, 2.0)
-psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",16, 2.0)
+psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",16, 1.0)
+psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",17, 1.0)
 psspy.change_plmod_icon(101,r"""1""",r"""GPMPPC""",10,1)
 
 
@@ -161,24 +161,19 @@ psspy.run(0, 1, 1000,  1, 0)
 psspy.change_var(var_ppc_setp+10,400)
 #psspy.change_var(var_ppc_setp+11,0)
 psspy.run(0, 10, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+10,350)
-psspy.run(0, 20, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+10,300)
-psspy.run(0, 30, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+10,250)
-psspy.run(0, 40, 1000,  1, 0)
 psspy.change_var(var_ppc_setp+10,200)
-psspy.run(0, 50, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+10,150)
-psspy.run(0, 60, 1000,  1, 0)
+psspy.run(0, 30, 1000,  1, 0)
 psspy.change_var(var_ppc_setp+10,100)
+psspy.run(0, 50, 1000,  1, 0)
+psspy.change_var(var_ppc_setp+10,200)
 psspy.run(0, 70, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+10,50)
-psspy.run(0, 80, 1000,  1, 0)
 psspy.change_var(var_ppc_setp+10,400)
-psspy.run(0, 110, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+10,50)
-psspy.run(0, 140, 1000,  1, 0)
+psspy.run(0, 90, 1000,  1, 0)
+psspy.change_var(var_ppc_setp+10,100)
+psspy.run(0, 100, 1000,  1, 0)
+psspy.change_var(var_ppc_setp+10,400)
+psspy.run(0, 130, 1000,  1, 0)
+
 
 
 # start draw curves
@@ -210,6 +205,7 @@ CurrentFig, CurrentAx = plt.subplots(1,1,sharex=False, figsize=(20,8));
 CurrentAx.plot(chandata['time'],chandata[4]);
 CurrentAx.plot(chandata['time'],chandata[15],color='coral',linestyle='--');
 CurrentAx.legend(['Active Power Generated','Active Limitation Commanded'])
+CurrentAx.set_xlim(left=4)
 CurrentAx.set_ylim([-10,410])
 CurrentAx.set_xlabel('Time/s')
 CurrentAx.set_ylabel('Power/MW')

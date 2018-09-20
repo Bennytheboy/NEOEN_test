@@ -46,7 +46,7 @@ if LoadScenario == "SummerLowLoad":
 if LoadScenario == "SimplifiedSystem":
         file_name = "NEOEN Western Downs Solar Farm_C3WV_mod"
 
-Disturbance_Load_Amount = range(0, 400, 50)
+Disturbance_Load_Amount = [0]#range(0, 400, 50)
 # Initialize
 psspy.read(0, GridInfoPath + LoadScenario + "/" + file_name +".raw")
 psspy.resq(GridInfoPath + LoadScenario + "/" + file_name + ".seq")
@@ -73,7 +73,7 @@ for i in range(0, len(Disturbance_Load_Amount)):
 
     psspy.bus_frequency_channel([1, 400], r"""System frequency""")
     psspy.voltage_channel([2, -1, -1, 101], r"""Inverter Voltage Mag.""")
-    psspy.voltage_channel([3, -1, -1, 400], r"""WDs SF POC Voltage Mag.""")
+    psspy.voltage_channel([3, -1, -1, 400], r"""WDSF POC Voltage Mag.""")
     psspy.branch_p_and_q_channel([4, -1, -1, 400, 46660], r"""1""", [r"""P Injection""", r"""Q Injection"""])
     ierr = psspy.machine_array_channel([7, 2, 101], r"""1""", r"""Pelec 101""")
     ierr = psspy.machine_array_channel([8, 3, 101], r"""1""", r"""Qelec 101""")
@@ -88,7 +88,7 @@ for i in range(0, len(Disturbance_Load_Amount)):
 
     # start simulation
     psspy.strt_2([0, 0], OutputFilePath)
-    psspy.run(0, 1, 10000, 20, 0)
+    psspy.run(0, 5, 10000, 20, 0)
     psspy.load_data_3(600, r"""1""", [_i, _i, _i, _i, _i], [Disturbance_Load_Amount[i], _f, _f, _f, _f, _f])
     psspy.run(0, 10, 10000, 20, 0)
     psspy.load_data_3(600, r"""1""", [_i, _i, _i, _i, _i], [300, _f, _f, _f, _f, _f])
@@ -118,6 +118,7 @@ for i in range(0, len(Disturbance_Load_Amount)):
     mpl.rcParams['legend.fancybox'] = True
     mpl.rcParams['legend.numpoints'] = 3
     mpl.rcParams['legend.fontsize'] = 'small'
+    mpl.rcParams['legend.loc'] = 'lower center'
 
     for t_terminate_point in range(0, len(chandata[4])):
         if chandata[4][t_terminate_point] < 1:
@@ -140,10 +141,10 @@ for i in range(0, len(Disturbance_Load_Amount)):
     CurrentAx[0][1].tick_params(axis='both', which='both', labelsize=24)
     CurrentAx[1][1].tick_params(axis='both', which='both', labelsize=24)
 
-    CurrentAx[0][0].set_xlim(2, 60)
-    CurrentAx[1][0].set_xlim(2, 60)
-    CurrentAx[0][1].set_xlim(2, 60)
-    CurrentAx[1][1].set_xlim(2, 60)
+    CurrentAx[0][0].set_xlim(2, 200)
+    CurrentAx[1][0].set_xlim(2, 200)
+    CurrentAx[0][1].set_xlim(2, 200)
+    CurrentAx[1][1].set_xlim(2, 200)
 
     CurrentAx[0][0].set_ylim([0.8, 1.2])
 
@@ -174,12 +175,12 @@ for i in range(0, len(Disturbance_Load_Amount)):
     CurrentAx[0][1].set_ylabel(r"""Power/MW""")
     CurrentAx[1][1].set_ylabel(r"""Power/MVar""")
 
-    CurrentAx[0][0].set_title(r"""Inverter Terminal Voltage""")
-    CurrentAx[1][0].set_title(r"""System Frequency""")
-    CurrentAx[0][1].set_title(r"""WDs SF Active Power Output""")
-    CurrentAx[1][1].set_title(r"""WDs SF Reactive Power Output""")
+    CurrentAx[0][0].legend([r"""Inverter Terminal Voltage"""])
+    CurrentAx[1][0].legend([r"""System Frequency"""])
+    CurrentAx[0][1].legend([r"""WDSF Active Power Output"""])
+    CurrentAx[1][1].legend([r"""WDSF Reactive Power Output"""])
 
-    save_figure_name = GraphPath + "/" + str(Disturbance_Load_Amount[i])+ 'Frequency Reponse (Overfrequency Derating).png'
+    save_figure_name = GraphPath + "/" + str(Disturbance_Load_Amount[i])+ '200s_Frequency Reponse (Overfrequency Derating).png'
     ##        save_figure_name=GraphPath+"/"+'Frequency Control'+'.png'
     CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
     plt.close(CurrentFig)

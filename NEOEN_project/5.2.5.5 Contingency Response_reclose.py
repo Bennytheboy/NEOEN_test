@@ -26,25 +26,25 @@ psspy.psseinit(50000)
 
 # Set Simulation Path.
 # if on laptop
-LoadScenario = "SummerPeakLoad"
-ClauseName = "5.2.5.5 Contingency Response_reclose"
-ProgramPath = "C:/NEOEN/P_SimulationScripts/"
-GridInfoPath = "C:/NEOEN/NEM_files/"
-HuaweiModelPath = "C:/NEOEN/Huawei_models/"
-OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-FigurePath = "C:/NEOEN/R_Results/"
-
-# if on desktop
 # LoadScenario = "SummerPeakLoad"
 # ClauseName = "5.2.5.5 Contingency Response_reclose"
-# ProgramPath = "F:/NEOEN/P_SimulationScripts/"
-# GridInfoPath = "F:/NEOEN/NEM_files/"
-# HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+# ProgramPath = "C:/NEOEN/P_SimulationScripts/"
+# GridInfoPath = "C:/NEOEN/NEM_files/"
+# HuaweiModelPath = "C:/NEOEN/Huawei_models/"
 # OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
-# FigurePath = "F:/NEOEN/R_Results/"
+# FigurePath = "C:/NEOEN/R_Results/"
+
+# if on desktop
+LoadScenario = "SummerPeakLoad"
+ClauseName = "5.2.5.5 Contingency Response_reclose"
+ProgramPath = "F:/NEOEN/P_SimulationScripts/"
+GridInfoPath = "F:/NEOEN/NEM_files/"
+HuaweiModelPath = "F:/NEOEN/Huawei_models/"
+OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
+FigurePath = "F:/NEOEN/R_Results/"
 
 if LoadScenario == "SummerPeakLoad":
-    file_name = "SummerHi-20171219-153047-34-SystemNormal_all"
+    file_name = "SummerHi-20171219-153047-34-SystemNormal_all_laptop"
 if LoadScenario == "SummerLowLoad":
     file_name = "SummerLo-20171226-043047-34-SystemNormal_all"
 if LoadScenario == "SimplifiedSystem":
@@ -98,8 +98,8 @@ psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
 #                       _f])  # be careful, partial active power = not enough solar irraidance.
 psspy.fdns([1, 0, 0, 1, 0, 0, 99, 0])
 t_q = 0.569
-psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
-psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 6, -0.5)
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.3333)
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 6, -0.3333)
 psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 13, -t_q)
 psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 14, t_q)
 psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 13, -t_q)
@@ -206,10 +206,10 @@ CurrentAx[1][0].tick_params(axis='both', which='both', labelsize=24)
 CurrentAx[0][1].tick_params(axis='both', which='both', labelsize=24)
 CurrentAx[1][1].tick_params(axis='both', which='both', labelsize=24)
 
-CurrentAx[0][0].set_xlim([4, 7])
-CurrentAx[1][0].set_xlim([4, 7])
-CurrentAx[0][1].set_xlim([4, 7])
-CurrentAx[1][1].set_xlim([4, 7])
+CurrentAx[0][0].set_xlim(left=0)
+CurrentAx[1][0].set_xlim(left=0)
+CurrentAx[0][1].set_xlim(left=0)
+CurrentAx[1][1].set_xlim(left=0)
 
 CurrentAx[0][0].set_ylim([0, 1.5])
 CurrentAx[1][0].set_ylim([0, 1.5])
