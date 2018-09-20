@@ -150,7 +150,8 @@ psspy.fact()
 psspy.tysl(0)
 psspy.bsys(0,0,[ 0.4, 500.],0,[],0,[],0,[],0,[])
 
-psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",16, 8.0)
+psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",16, 1.0)
+psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",17, 1.0)
 psspy.change_plmod_icon(101,r"""1""",r"""GPMPPC""",10,1)
 
 

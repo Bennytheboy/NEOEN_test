@@ -31,7 +31,7 @@ GridInfoPath = "F:/NEOEN/NEM_files/"
 HuaweiModelPath = "F:/NEOEN/Huawei_models/"
 OutputFilePath = ProgramPath + ClauseName+"_Simulation.outx"
 FigurePath = "F:/NEOEN/R_Results/"
-test_name = "up_lim"
+test_name = "lower_lim"
 
 
 if LoadScenario == "SummerPeakLoad":
@@ -47,7 +47,7 @@ if LoadScenario == "SimplifiedSystem":
 # Active Power Setpoint
 S = 100.00   # in MVA
 ActivePowerSetpoint = 1.0  # in p.u
-ReactivePowerSetpoint = 0.5  # in P.u.
+ReactivePowerSetpoint = 0.0  # in P.u.
 #vref = numpy.arange(0.6, 1.4, 0.02)
 
 # Initialize
@@ -146,11 +146,11 @@ psspy.change_plmod_con(600, r"""1""", r"""GENCLS""", 1, 8)
 # start simulation
 psspy.strt_2([0, 0], OutputFilePath)
 psspy.run(0, 1, 1000, 1, 0)
-psspy.change_var(var_ppc_setp + 68, 1.0675)
+psspy.change_var(var_ppc_setp + 68, 1.043)
 # psspy.change_plmod_var(101,r"""1""",r"""GPMPPC""",11, 432)
 # psspy.change_plmod_var(101,r"""1""",r"""GPMPPC""",69, 1.05)
 psspy.run(0, 5, 1000, 1, 0)
-psspy.change_var(var_ppc_setp + 68, 1.1)
+psspy.change_var(var_ppc_setp + 68, 0.993)
 # psspy.change_var(var_ppc_setp + 68, 1.00)
 # psspy.change_plmod_var(101,r"""1""",r"""GPMPPC""",69, 1.03)
 psspy.run(0, 10, 1000, 1, 0)
@@ -182,6 +182,7 @@ mpl.rcParams['lines.linewidth'] = 3.0
 mpl.rcParams['legend.fancybox'] = True
 mpl.rcParams['legend.numpoints'] = 3
 mpl.rcParams['legend.fontsize'] = 'small'
+mpl.rcParams['legend.loc'] = 'lower right'
 
 CurrentFig, CurrentAx = plt.subplots(3, 2, sharex=False, figsize=(20, 15));
 CurrentAx[0][0].plot(chandata['time'], chandata[7]);
@@ -227,12 +228,13 @@ CurrentAx[2][0].set_ylabel(r"""U/PU""")
 # CurrentAx[1][1].set_ylabel(r"""Q_Poc/MVar""")
 # CurrentAx[2][1].set_ylabel(r"""U_Poc/PU""")
 
-CurrentAx[0][0].set_title(r"""Inverter P_gen""")
-CurrentAx[1][0].set_title(r"""Inverter Q_gen""")
-CurrentAx[2][0].set_title(r"""Inverter E_terminal""")
-CurrentAx[0][1].set_title(r"""WDSF P Injection""")
-CurrentAx[1][1].set_title(r"""WDSF Q Injection""")
-CurrentAx[2][1].set_title(r"""WDSF PoC Voltage""")
+CurrentAx[0][0].legend([r"""Inverter P_gen"""])
+CurrentAx[1][0].legend([r"""Inverter Q_gen"""])
+CurrentAx[2][0].legend([r"""Inverter E_terminal"""])
+CurrentAx[0][1].legend([r"""WDSF P Injection"""])
+CurrentAx[1][1].legend([r"""WDSF Q Injection"""])
+CurrentAx[2][1].legend([r"""WDSF PoC Voltage_setpoint""", r"""WDSF PoC Voltage"""])
+# CurrentAx[2][1].legend([r"""WDSF PoC Voltage"""])
 
 save_figure_name = GraphPath + "/" + test_name + '-' + '.png'
 CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')

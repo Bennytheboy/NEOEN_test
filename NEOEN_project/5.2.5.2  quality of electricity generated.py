@@ -22,7 +22,7 @@ _s = psspy.getdefaultchar()
 redirect.psse2py()
 psspy.psseinit(50000)
 
-S = 100.00   # in MVA
+S = 120.00   # in MVA
 ActivePowerSetpoint = 1  # in p.u
 
 # Set Simulation Path.  laptop
@@ -147,6 +147,22 @@ psspy.bsys(0,0,[ 0.4, 500.],0,[],0,[],0,[],0,[])
 
 psspy.change_plmod_con(101,r"""1""",r"""GPMPPC""",16, 8.0)
 psspy.change_plmod_icon(101,r"""1""",r"""GPMPPC""",10,1)
+
+t_q = 0.569
+# psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.6667)
+# psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, -0.5)
+psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 13, -t_q)
+psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 14, t_q)
+psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 13, -t_q)
+psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 14, t_q)
+psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 13, -t_q)
+psspy.change_plmod_con(103, r"""1""", r"""HWS2000""", 14, t_q)
+psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 13, -t_q)
+psspy.change_plmod_con(104, r"""1""", r"""HWS2000""", 14, t_q)
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 23, 0.001)  # QV droop deadband
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 24, 0.4)  # QV droop
+psspy.change_plmod_icon(101, r"""1""", r"""GPMPPC""", 4, 2)  # kVar control =0, PF control = 1, Droop Control = 2, Voltage Control = 3
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 10, 1.0)
 
 
 # start simulation

@@ -48,7 +48,7 @@ if LoadScenario == "SummerPeakLoad":
 if LoadScenario == "SummerLowLoad":
     file_name = "SummerLo-20171226-043047-34-SystemNormal_all"
 if LoadScenario == "SimplifiedSystem":
-    file_name = "NEOEN Western Downs Solar Farm_C3WV_mod_T"
+    file_name = "NEOEN Western Downs Solar Farm_C3WV_mod"
 
 Bus_Name = []
 Bus_List = []
@@ -149,7 +149,7 @@ for i in range(0, len(Branch_Outage_List_Start)):
         psspy.machine_data_2(37530, r"""12""", [0, _i, _i, _i, _i, _i],
                              [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
         psspy.machine_data_2(101, r"""1""", [_i, _i, _i, _i, _i, _i],
-                             [100, _f,60, -40, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                             [100, _f, 60, -40, 120, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
         psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
                              [100, _f, 60, -40, 120, _f,120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
         psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
@@ -163,8 +163,8 @@ for i in range(0, len(Branch_Outage_List_Start)):
         #                       _f])  # be careful, partial active power = not enough solar irraidance.
         psspy.fdns([1, 0, 0, 1, 0, 0, 99, 0])
         t_q = 0.569
-        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
-        psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, -0.5)
+        # psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.6667)
+        # psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, -0.5)
         psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 13, -t_q)
         psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 14, t_q)
         psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 13, -t_q)

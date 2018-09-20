@@ -42,8 +42,8 @@ if LoadScenario == "SimplifiedSystem":
 #########################################   Read Input List #######################################
 
 # Active Power Setpoint
-ActivePowerSetpoint = range(0, 101, 50)
-ReactivePowerSetpoint = [-40, 60]
+ActivePowerSetpoint = [100] #range(0, 101, 50)
+ReactivePowerSetpoint = [-40]#[-40, 60]
 vref = numpy.arange(0.7, 1.3, 0.05)
 
 # Initialize
@@ -73,7 +73,7 @@ for i in range(0, len(ActivePowerSetpoint)):
                                   _f,
                                   _f])
             psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
-                                 [ActivePowerSetpoint[i], _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+                                 [ActivePowerSetpoint[i]+2, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
                                   _f])
             psspy.machine_data_2(102, r"""1""", [_i, _i, _i, _i, _i, _i],
                                  [_f, _f, ReactivePowerSetpoint[j], _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
@@ -83,7 +83,7 @@ for i in range(0, len(ActivePowerSetpoint)):
                                   _f,
                                   _f])
             psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
-                                 [ActivePowerSetpoint[i] , _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+                                 [ActivePowerSetpoint[i]+3 , _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
                                   _f])
             psspy.machine_data_2(103, r"""1""", [_i, _i, _i, _i, _i, _i],
                                  [_f, _f, ReactivePowerSetpoint[j], _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
@@ -93,7 +93,7 @@ for i in range(0, len(ActivePowerSetpoint)):
                                   _f,
                                   _f])
             psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
-                                 [ActivePowerSetpoint[i], _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
+                                 [ActivePowerSetpoint[i]+2, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
                                   _f])
             psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
                                  [_f, _f, ReactivePowerSetpoint[j], _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f,
@@ -123,8 +123,8 @@ for i in range(0, len(ActivePowerSetpoint)):
             psspy.change_plmod_con(600, r"""1""", r"""GENCLS""", 2, 1)
             # tune the controllers
             t_q=0.569
-            psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
-            psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, -0.5)
+            psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.335)
+            psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 6, -0.335)
             psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 13, -t_q)
             psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 14, t_q)
             psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 13, -t_q)
@@ -207,9 +207,9 @@ for i in range(0, len(ActivePowerSetpoint)):
             v_poc_u = 1.4
             v_poc_l = 0.4
             p_inv_u = 150
-            p_inv_l = -50
-            p_poc_u = 450
-            p_poc_l = -100
+            p_inv_l = 0
+            p_poc_u = 500
+            p_poc_l = 0
             q_inv_u = 80
             q_inv_l = -80
             q_poc_u = 300
@@ -223,13 +223,13 @@ for i in range(0, len(ActivePowerSetpoint)):
             major_ticks_q_inv = numpy.arange(q_inv_l, q_inv_u, 20)
             minor_ticks_q_inv = numpy.arange(q_inv_l, q_inv_u, 10)
 
-            major_ticks_p_poc = numpy.arange(p_poc_l, p_poc_u, 150)
-            minor_ticks_p_poc = numpy.arange(p_poc_l, p_poc_u, 50)
+            major_ticks_p_poc = numpy.arange(p_poc_l, p_poc_u, 100)
+            minor_ticks_p_poc = numpy.arange(p_poc_l, p_poc_u, 20)
             major_ticks_q_poc = numpy.arange(q_poc_l, q_poc_u, 100)
             minor_ticks_q_poc = numpy.arange(q_poc_l, q_poc_u, 50)
 
 
-            CurrentFig, CurrentAx = plt.subplots(2, 3, sharex=False, figsize=(20, 15));
+            CurrentFig, CurrentAx = plt.subplots(2, 3, sharex=False, figsize=(32, 15));
             CurrentAx[0][0].plot(chandata['time'], chandata[2]);
             ##            CurrentAx[0][0].plot(chandata['time'],chandata[9],linestyle='--',color='coral');
             CurrentAx[0][1].plot(chandata['time'], chandata[6]);

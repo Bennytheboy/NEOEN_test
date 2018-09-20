@@ -98,8 +98,8 @@ psspy.machine_data_2(104, r"""1""", [_i, _i, _i, _i, _i, _i],
 #                       _f])  # be careful, partial active power = not enough solar irraidance.
 psspy.fdns([1, 0, 0, 1, 0, 0, 99, 0])
 t_q = 0.569
-psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.5)
-psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, -0.5)
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 5, 0.3333)
+psspy.change_plmod_con(101, r"""1""", r"""GPMPPC""", 6, -0.3333)
 psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 13, -t_q)
 psspy.change_plmod_con(101, r"""1""", r"""HWS2000""", 14, t_q)
 psspy.change_plmod_con(102, r"""1""", r"""HWS2000""", 13, -t_q)
