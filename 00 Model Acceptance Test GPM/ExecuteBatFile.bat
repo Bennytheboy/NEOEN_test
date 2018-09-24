@@ -1,1 +1,0 @@
-C:/Python27/python "DynamicSim.py" "001_scr_3.0_xr_3.0_P_100.0_Qzero.sav" 720.000 "02.Frequency step to 49Hz" "C:\Users\Z3209715\PycharmProjects\PSSE_HW\00 Model Acceptance Test GPM\Test Files\Under_Frequency_Trip_Test"
