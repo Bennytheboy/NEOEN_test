@@ -544,17 +544,29 @@ def POC_Pref_Step_Test():
             
         print Pset_vals[0]
         # Run dymanic simulations  ################## HUAWEI EDIT SETPOINT FROM CON TO VAR,  ###################
-        psspy.run(0, 1.0,5,5,5)
+        psspy.run(0, 2.0 ,5,5,5)
         for indx, L1 in enumerate(L_vals):
                 psspy.change_var(L1+10, Pset_vals[indx]*(1-dPref))
 ##            psspy.change_con(J1+CON_PPCPref, Pset_vals[indx]*(1-dPref))
-        psspy.run(0, 30.0,5,5,5)
+                psspy.run(0, 7.0, 5, 5, 5)
+        for indx, L1 in enumerate(L_vals):
+            psspy.change_var(L1 + 10, Pset_vals[indx] * 0.6)
+##            psspy.change_con(J1+CON_PPCPref, Pset_vals[indx]*(1-dPref))
+            psspy.run(0, 12.0, 5, 5, 5)
+        for indx, L1 in enumerate(L_vals):
+            psspy.change_var(L1 + 10, Pset_vals[indx] * 0.4)
+    ##            psspy.change_con(J1+CON_PPCPref, Pset_vals[indx]*(1-dPref))
+        psspy.run(0, 17.0, 5, 5, 5)
+        for indx, L1 in enumerate(L_vals):
+            psspy.change_var(L1 + 10, Pset_vals[indx] * 0.2)
+    ##            psspy.change_con(J1+CON_PPCPref, Pset_vals[indx]*(1-dPref))
+        psspy.run(0, 22.0,5,5,5)
         
         for indx, L1 in enumerate(L_vals):
                 psspy.change_var(L1+10, Pset_vals[indx])
 ##            psspy.change_con(J1+CON_PPCPref, Pset_vals[indx])
                 
-        psspy.run(0, 60.0,5,5,5)
+        psspy.run(0, 24.0,5,5,5)
 		
     plotResults(TestDir,pathTestDir,pyPlot,csvPlot)
     

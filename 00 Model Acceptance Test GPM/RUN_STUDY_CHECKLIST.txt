@@ -7,6 +7,6 @@ Fault_Study_Test~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|N
 FRT_Iq_Response_Test~~~~~~~~~~~~~~~~~~~~~~~~~~~|N
 Under_Voltage_Trip_Test~~~~~~~~~~~~~~~~~~~~~~~~|N
 Over_Voltage_Trip_Test~~~~~~~~~~~~~~~~~~~~~~~~~|N
-Under_Frequency_Trip_Test~~~~~~~~~~~~~~~~~~~~~~|Y
+Under_Frequency_Trip_Test~~~~~~~~~~~~~~~~~~~~~~|N
 Over_Frequency_Trip_Test~~~~~~~~~~~~~~~~~~~~~~~|Y
 Long_Run_Test~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|N
