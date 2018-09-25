@@ -56,14 +56,14 @@ psspy.dyre_new([1, 1, 1, 1], GridInfoPath  + "/" + file_name + ".dyr", "", "", "
 psspy.addmodellibrary(HuaweiModelPath+'HWS2000_psse34.dll')
 psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_PPC_V13_34.dll')
 psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_SB_V7.dll')
-psspy.dynamics_solution_param_2([_i,_i,_i,_i,_i,_i,_i,_i],[0.300,_f, 0.001,0.004,_f,_f,_f,_f])
+psspy.dynamics_solution_param_2([_i,_i,_i,_i,_i,_i,_i,_i],[1.0,_f, 0.001,0.004,_f,_f,_f,_f])
 # psspy.two_winding_chng_5(104,299,r"""1""",[_i,_i,_i,_i,_i,_i,_i,_i,299,_i,_i,1,_i,_i,_i],[_f,_f,_f, 1.0675,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],[_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],r"""SS-TF-1""",
 # r"""YNYN0""")
 # psspy.two_winding_chng_5(204,299,r"""1""",[_i,_i,_i,_i,_i,_i,_i,_i,299,_i,_i,1,_i,_i,_i],[_f,_f,_f, 1.0675,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],[_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],r"""SS-TF-2""",
 # r"""YNYN0""")
 psspy.machine_data_2(500, r"""1""", [_i, _i, _i, _i, _i, _i],
                          [90, _f, _f, _f, 96.8, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
-psspy.load_data_3(1000,r"""1""",[_i,_i,_i,_i,_i],[2000,20,_f,_f,_f,_f])	# apply assumption load
+psspy.load_data_3(1000,r"""1""",[_i,_i,_i,_i,_i],[1000,20,_f,_f,_f,_f])	# apply assumption load
 psspy.fnsl([0,0,0,1,0,0,99,0])
 
 
@@ -115,8 +115,8 @@ ierr=psspy.var_channel([9,var_ppc_setp+10],"Active Power Setpoint")
 # psspy.change_con(var_inv2_con+13, 0.59)	# Inverter Con, Looks good
 
 
-psspy.change_plmod_con(1000,r"""1""",r"""GENCLS""",1, 0.2)
-psspy.change_plmod_con(1000,r"""1""",r"""GENCLS""",2, 0.1)
+psspy.change_plmod_con(1000,r"""1""",r"""GENCLS""",1, 2)
+psspy.change_plmod_con(1000,r"""1""",r"""GENCLS""",2, 1)
 
 # start simulation
 
@@ -126,9 +126,9 @@ psspy.run(0, 1, 10000,  20, 0)
 psspy.change_var(var_ppc_setp+10,85);
 
 psspy.run(0, 5, 10000,  20, 0)
-psspy.load_data_3(1000,r"""1""",[_i,_i,_i,_i,_i],[ 20,_f,_f,_f,_f,_f])
+psspy.load_data_3(1000,r"""1""",[_i,_i,_i,_i,_i],[ 500,_f,_f,_f,_f,_f])
 psspy.run(0, 5.5, 10000,  20, 0)
-psspy.load_data_3(1000,r"""1""",[_i,_i,_i,_i,_i],[ 20,_f,_f,_f,_f,_f])
+psspy.load_data_3(1000,r"""1""",[_i,_i,_i,_i,_i],[ 500,_f,_f,_f,_f,_f])
 psspy.run(0, 9.5, 10000,  20, 0)
 psspy.load_data_3(1000,r"""1""",[_i,_i,_i,_i,_i],[ 800,_f,_f,_f,_f,_f])
 psspy.run(0, 60, 10000,  20, 0)
@@ -176,10 +176,10 @@ CurrentAx[1][0].tick_params(axis='both', which='both', labelsize=24)
 CurrentAx[0][1].tick_params(axis='both', which='both', labelsize=24)
 CurrentAx[1][1].tick_params(axis='both', which='both', labelsize=24)
 
-CurrentAx[0][0].set_xlim([5,10])
-CurrentAx[1][0].set_xlim([5,10])
-CurrentAx[0][1].set_xlim([5,10])
-CurrentAx[1][1].set_xlim([5,10])
+CurrentAx[0][0].set_xlim([0,60])
+CurrentAx[1][0].set_xlim([0,60])
+CurrentAx[0][1].set_xlim([0,60])
+CurrentAx[1][1].set_xlim([0,60])
 
 CurrentAx[0][0].set_ylim([0.8,1.2])
 

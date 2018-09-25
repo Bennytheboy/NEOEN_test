@@ -31,24 +31,24 @@ psspy.psseinit(50000)
 
 # Set Simulation Path.
 # on laptop
-LoadScenario="SimplifiedSystem"
-ClauseName="Benchmarking"
-ProgramPath="C:/WISF/P_SimulationProgram/"
-GridInfoPath="C:/WISF/"+"D_"+LoadScenario+"/"
-HuaweiModelPath="C:/WISF/D_HuaweiModels/"
-OutputFilePath=ProgramPath+"SimulationOutput4.outx"
-FigurePath="C:/WISF/R_Results/"
-TestName ="5.2.5.5_contingency"
-
-# on desktop
 # LoadScenario="SimplifiedSystem"
 # ClauseName="Benchmarking"
-# ProgramPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/P_SimulationProgram/"
-# GridInfoPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/"+"D_"+LoadScenario+"/"
-# HuaweiModelPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/D_HuaweiModels/"
+# ProgramPath="C:/WISF/P_SimulationProgram/"
+# GridInfoPath="C:/WISF/"+"D_"+LoadScenario+"/"
+# HuaweiModelPath="C:/WISF/D_HuaweiModels/"
 # OutputFilePath=ProgramPath+"SimulationOutput4.outx"
-# FigurePath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results/"
+# FigurePath="C:/WISF/R_Results/"
 # TestName ="5.2.5.5_contingency"
+
+# on desktop
+LoadScenario="SimplifiedSystem"
+ClauseName="Benchmarking"
+ProgramPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/P_SimulationProgram/"
+GridInfoPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/"+"D_"+LoadScenario+"/"
+HuaweiModelPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/D_HuaweiModels/"
+OutputFilePath=ProgramPath+"SimulationOutput4.outx"
+FigurePath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results/"
+TestName ="5.2.5.5_contingency"
 
 if LoadScenario=="SummerPeakLoad":
     file_name="SummerHi-20171219-153047-34-SystemNormal"
@@ -67,8 +67,12 @@ psspy.addmodellibrary(HuaweiModelPath+'HWS2000_psse34.dll')
 psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_PPC_V13_34.dll')
 psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_SB_V7.dll')
 psspy.dynamics_solution_param_2([_i,_i,_i,_i,_i,_i,_i,_i],[0.300,_f, 0.001,0.004,_f,_f,_f,_f])
+psspy.two_winding_chng_5(700,800,r"""1""",[_i,_i,_i,_i,_i,_i,_i,_i,800,_i,_i,1,_i,_i,_i],[_f,_f,_f, 1.0,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],[_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],r"""WI_MAINTX1""","")
 psspy.machine_data_2(500, r"""1""", [_i, _i, _i, _i, _i, _i],
-                         [90, _f, _f, _f, 96.8, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                         [120, _f, _f, _f, 120, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+psspy.machine_chng_2(500,r"""1""",[_i,_i,_i,_i,_i,_i],[_f,0.0,0.0,0.0,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f])
+psspy.plant_chng_3(500,0,_i,[ 1.05,_f])
+psspy.plant_chng_3(1000,0,_i,[ 1.05,_f])
 psspy.fnsl([0, 0, 0, 1, 1, 1, 99, 0])
 
 psspy.bus_frequency_channel([1, 1000], r"""System frequency""")
@@ -111,7 +115,7 @@ psspy.bsys(0, 0, [0.4, 500.], 0, [], 0, [], 0, [], 0, [])
 psspy.strt_2([0, 0], OutputFilePath)
 psspy.run(0, 0.5, 1000, 1, 0)
 psspy.change_var(var_ppc_setp + 68, 1.05)
-psspy.change_var(var_ppc_setp + 10, 85)
+psspy.change_var(var_ppc_setp + 10, 100)
 psspy.run(0, 1, 1000, 1, 0)
 psspy.change_var(var_ppc_setp + 68, 1.05)
 psspy.run(0, 3, 1000, 1, 0)
@@ -119,38 +123,42 @@ psspy.run(0, 3, 1000, 1, 0)
 ########################  START LINE FAULT SIMULATION #########################
 TimeShift = 0;
 for i in range(0, 4):
-    for fault_type in range(1, 5):
+    for fault_type in [1]:  #range(1, 5):
 
         if i == 0:
-            psspy.branch_chng_3(400, 800, r"""1""", [_i, _i, _i, _i, _i, _i],
-                                [_f, 0.0001 * 0.001, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
+            psspy.branch_chng_3(400, 950, r"""1""", [_i, _i, _i, _i, _i, _i],
+                                [_f, 0.204585 * 0.08, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
                                 [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f], "")
-            psspy.seq_branch_data_3(400, 800, r"""1""", _i, [0.008 * 0.001, _f, _f, _f, _f, _f, _f, _f])
-            psspy.seq_branch_data_3(400, 800, r"""1""", _i, [_f, 0.12339 * 0.001, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.000 * 0.001, _f, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.0 * 0.001, _f, _f, _f, _f, _f, _f])
+            fault_time = 0.120
         if i == 1:
-            psspy.branch_chng_3(400, 800, r"""1""", [_i, _i, _i, _i, _i, _i],
-                                [_f, 0.0001 * 0.33, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
+            psspy.branch_chng_3(400, 950, r"""1""", [_i, _i, _i, _i, _i, _i],
+                                [_f, 0.204585 * 0.33, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
                                 [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f], "")
-            psspy.seq_branch_data_3(400, 800, r"""1""", _i, [0.008 * 0.33, _f, _f, _f, _f, _f, _f, _f])
-            psspy.seq_branch_data_3(400, 800, r"""1""", _i, [_f, 0.12339 * 0.33, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.000 * 0.33, _f, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.0 * 0.33, _f, _f, _f, _f, _f, _f])
+            fault_time = 0.720
         if i == 2:
-            psspy.branch_chng_3(400, 800, r"""1""", [_i, _i, _i, _i, _i, _i],
-                                [_f, 0.0001 * 1, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
+            psspy.branch_chng_3(400, 950, r"""1""", [_i, _i, _i, _i, _i, _i],
+                                [_f, 0.204585 * 1, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
                                 [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f], "")
-            psspy.seq_branch_data_3(400, 800, r"""1""", _i, [0.008 * 1, _f, _f, _f, _f, _f, _f, _f])
-            psspy.seq_branch_data_3(400, 800, r"""1""", _i, [_f, 0.12339 * 1, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.0 * 1, _f, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.0 * 1, _f, _f, _f, _f, _f, _f])
+            fault_time = 0.720
         if i == 3:
-            psspy.branch_chng_3(400, 800, r"""1""", [_i, _i, _i, _i, _i, _i],
-                                [_f, 0.0001 * 3, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
+            psspy.branch_chng_3(400, 950, r"""1""", [_i, _i, _i, _i, _i, _i],
+                                [_f, 0.204585 * 3, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
                                 [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f], "")
-            psspy.seq_branch_data_3(400, 800, r"""1""", _i, [0.008 * 3, _f, _f, _f, _f, _f, _f, _f])
-            psspy.seq_branch_data_3(400, 800, r"""1""", _i, [_f, 0.12339 * 3, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.0 * 3, _f, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.0 * 3, _f, _f, _f, _f, _f, _f])
+            fault_time = 0.720
 
         psspy.run(0, 5 + TimeShift, 1000, 1, 0)
-        if fault_type == 1:  # three phase
+        if fault_type == 1 :  # three phase
             fault_name = 'ThreePhase'
-            psspy.dist_bus_fault(700, 1, 330.0, [0.0, -0.2E+10])
-            fault_time = 0.520
+            psspy.dist_bus_fault(400, 1, 66.0, [0.0, -0.2E+10])
+            # fault_time = 0.120
 
         if fault_type == 2:  # single phase
             psspy.dist_scmu_fault_2([0, 0, 1, 400, _i], [0.0001, 0.0001, 0.0, 0.0])
@@ -242,9 +250,9 @@ TIME = numpy.array(chandata['time'])
 FREQ = numpy.array(chandata[1])
 V_INV = numpy.array(chandata[2])
 V_POC = numpy.array(chandata[3])
-P_INV = numpy.array(chandata[6]) * 96.8
+P_INV = numpy.array(chandata[6]) * 100
 P_POC = numpy.array(chandata[4])
-Q_INV = numpy.array(chandata[7]) * 96.8
+Q_INV = numpy.array(chandata[7]) * 100
 Q_POC = numpy.array(chandata[5])
 
 numpy.savetxt(GraphPath + TestName+ 'PSSE Fault.csv', numpy.transpose([TIME, FREQ, V_INV, V_POC, P_INV, P_POC, Q_INV, Q_POC]),
@@ -289,10 +297,10 @@ CurrentAx[2][1].set_xlim(left=0)
 
 CurrentAx[0][0].set_ylim([0, 120])
 CurrentAx[1][0].set_ylim([-60, 80])
-CurrentAx[2][0].set_ylim([0.6, 1.4])
+CurrentAx[2][0].set_ylim([0.0, 1.4])
 CurrentAx[0][1].set_ylim([-5, 200])
 CurrentAx[1][1].set_ylim([-100, 120])
-CurrentAx[2][1].set_ylim([0.6, 1.4])
+CurrentAx[2][1].set_ylim([0.0, 1.4])
 
 # CurrentAx[0][0].set_xlabel(r"""Time/s""")
 # CurrentAx[1][0].set_xlabel(r"""Time/s""")

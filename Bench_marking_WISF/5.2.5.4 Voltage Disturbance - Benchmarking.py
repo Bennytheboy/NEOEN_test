@@ -209,10 +209,10 @@ CurrentAx[0][1].set_xlim(left=0)
 CurrentAx[1][1].set_xlim(left=0)
 CurrentAx[2][1].set_xlim(left=0)
 
-CurrentAx[0][0].set_ylim([0, 120])
+CurrentAx[0][0].set_ylim([0, 200])
 CurrentAx[1][0].set_ylim([-60, 80])
 CurrentAx[2][0].set_ylim([0.6, 1.4])
-CurrentAx[0][1].set_ylim([-5, 200])
+CurrentAx[0][1].set_ylim([-5, 300])
 CurrentAx[1][1].set_ylim([-100, 120])
 CurrentAx[2][1].set_ylim([0.6, 1.4])
 

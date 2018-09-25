@@ -59,7 +59,8 @@ psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_SB_V7.dll')
 psspy.dynamics_solution_param_2([_i,_i,_i,_i,_i,_i,_i,_i],[0.300,_f, 0.001,0.004,_f,_f,_f,_f])
 
 psspy.machine_data_2(500, r"""1""", [_i, _i, _i, _i, _i, _i],
-                         [90, _f, _f, _f, 96.8, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+                         [105, _f, _f, _f, 96.8, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+psspy.machine_chng_2(500,r"""1""",[_i,_i,_i,_i,_i,_i],[_f,0.0,0.0,0.0,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f])
 # psspy.two_winding_chng_5(104,299,r"""1""",[_i,_i,_i,_i,_i,_i,_i,_i,299,_i,_i,1,_i,_i,_i],[_f,_f,_f, 1.0,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],[_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],r"""SS-TF-1""",
 # r"""YNYN0""")
 # psspy.two_winding_chng_5(204,299,r"""1""",[_i,_i,_i,_i,_i,_i,_i,_i,299,_i,_i,1,_i,_i,_i],[_f,_f,_f, 1.0,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],[_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],r"""SS-TF-2""",
@@ -118,7 +119,7 @@ psspy.run(0, 1, 1000,  1, 0)
 # #
 # psspy.run(0, 1, 1000,  1, 0)
 psspy.change_var(var_ppc_setp+68,1.01)
-psspy.change_var(var_ppc_setp+10,85)
+psspy.change_var(var_ppc_setp+10,100)
 
 psspy.run(0, 5,  1000,  1, 0)
 psspy.change_var(var_ppc_setp+68,1.06)

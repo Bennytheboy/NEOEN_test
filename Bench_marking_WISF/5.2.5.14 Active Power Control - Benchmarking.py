@@ -82,6 +82,9 @@ ierr=psspy.machine_array_channel([7,3,500],r"""1""",r"""Qelec Inverter""")
 ierr=psspy.var_channel([8,var_ppc_setp+68],"Voltage Setpoint")
 ierr=psspy.var_channel([9,var_ppc_setp+10],"Active Power Setpoint")
 
+# psspy.change_con(var_ppc_conp+1,0.05)
+# psspy.change_con(var_ppc_conp+2,0.40)
+
 # psspy.change_con(var_ppc_conp+9, 1.0)
 # psspy.change_con(var_ppc_conp+4, 0.6)
 # psspy.change_con(var_ppc_conp+5,-0.6)
@@ -117,16 +120,16 @@ psspy.change_var(var_ppc_setp+68,1.01)
 psspy.change_var(var_ppc_setp+10,85)
 
 psspy.run(0, 5,  1000,  1, 0)
-psspy.change_var(var_ppc_setp+10,25)
-psspy.run(0, 20, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+10,85)
+psspy.change_var(var_ppc_setp+10,30)
+psspy.run(0, 75, 1000,  1, 0)
+psspy.change_var(var_ppc_setp+10,50)
 
-psspy.run(0, 35, 1000,  1, 0)
+psspy.run(0, 110, 1000,  1, 0)
 psspy.change_var(var_ppc_setp+10,65)
-psspy.run(0, 50, 1000,  1, 0)
+psspy.run(0, 130, 1000,  1, 0)
 psspy.change_var(var_ppc_setp+10,85)
 
-psspy.run(0,65,1000,1,0)
+psspy.run(0,180,1000,1,0)
 
 
 GraphPath=FigurePath+ClauseName+'/'
@@ -191,7 +194,7 @@ CurrentAx[2][1].set_xlim(left=0)
 CurrentAx[0][0].set_ylim([0, 120])
 CurrentAx[1][0].set_ylim([-60, 80])
 CurrentAx[2][0].set_ylim([0.6, 1.4])
-CurrentAx[0][1].set_ylim([-5, 200])
+CurrentAx[0][1].set_ylim([-5, 100])
 CurrentAx[1][1].set_ylim([-100, 120])
 CurrentAx[2][1].set_ylim([0.6, 1.4])
 

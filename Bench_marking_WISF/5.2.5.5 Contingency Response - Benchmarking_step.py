@@ -110,10 +110,10 @@ psspy.bsys(0, 0, [0.4, 500.], 0, [], 0, [], 0, [], 0, [])
 # start simulation
 psspy.strt_2([0, 0], OutputFilePath)
 psspy.run(0, 0.5, 1000, 1, 0)
-# psspy.change_var(var_ppc_setp + 68, 1.05)
+psspy.change_var(var_ppc_setp + 68, 1.05)
 psspy.change_var(var_ppc_setp + 10, 85)
 psspy.run(0, 1, 1000, 1, 0)
-# psspy.change_var(var_ppc_setp + 68, 1.05)
+psspy.change_var(var_ppc_setp + 68, 1.05)
 psspy.run(0, 3, 1000, 1, 0)
 
 ########################  START LINE FAULT SIMULATION #########################
