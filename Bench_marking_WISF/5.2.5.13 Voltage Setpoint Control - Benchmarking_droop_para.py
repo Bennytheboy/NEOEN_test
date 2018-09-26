@@ -33,7 +33,7 @@ psspy.psseinit(50000)
 
 # Set Simulation Path.
 LoadScenario="SimplifiedSystem"
-ClauseName="Benchmarking_droop"
+ClauseName="Benchmarking_droop_VP"
 ProgramPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/P_SimulationProgram/"
 GridInfoPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/"+"D_"+LoadScenario+"/"
 HuaweiModelPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/D_HuaweiModels/"
@@ -60,6 +60,12 @@ psspy.addmodellibrary(HuaweiModelPath+'HWS2000_psse34.dll')
 psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_PPC_V13_34.dll')
 psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_SB_V7.dll')
 psspy.dynamics_solution_param_2([_i,_i,_i,_i,_i,_i,_i,_i],[0.300,_f, 0.001,0.004,_f,_f,_f,_f])
+# psspy.two_winding_chng_5(700,800,r"""1""",[_i,_i,_i,_i,_i,_i,_i,_i,800,_i,_i,1,_i,_i,_i],[_f,_f,_f, 1.0,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],[_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f],r"""WI_MAINTX1""","")
+psspy.machine_data_2(500, r"""1""", [_i, _i, _i, _i, _i, _i],
+                         [100, _f, _f, _f, 100, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
+# psspy.machine_chng_2(500,r"""1""",[_i,_i,_i,_i,_i,_i],[_f,0.0,0.0,0.0,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f,_f])
+# psspy.plant_chng_3(500,0,_i,[ 1.05,_f])
+# psspy.plant_chng_3(1000,0,_i,[ 1.05,_f])
 
 psspy.machine_data_2(500, r"""1""", [_i, _i, _i, _i, _i, _i],
                      [90, _f, _f, _f, 96.8, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
@@ -129,7 +135,7 @@ psspy.strt_2([0,0], OutputFilePath)
 psspy.run(0, 1, 1000,  1, 0)
 # #
 # psspy.run(0, 1, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+68,1.01)
+psspy.change_var(var_ppc_setp+68,1.05)
 psspy.change_var(var_ppc_setp+10,85)
 
 psspy.run(0, 5,  1000,  1, 0)
@@ -188,7 +194,7 @@ Q_POC=numpy.array(chandata[5])
 V_SET=numpy.array(chandata[8])
 P_SET=numpy.array(chandata[9])
 
-# numpy.savetxt(GraphPath+'PSSE Voltage Control.csv', numpy.transpose([TIME,FREQ,V_INV,V_POC,P_INV,P_POC,Q_INV,Q_POC,V_SET,P_SET]), delimiter=',')
+numpy.savetxt(GraphPath+'PSSE Voltage Control.csv', numpy.transpose([TIME,FREQ,V_INV,V_POC,P_INV,P_POC,Q_INV,Q_POC,V_SET,P_SET]), delimiter=',')
 
 # set figure preference
 mpl.rcParams['grid.color'] = 'k'

@@ -123,7 +123,8 @@ psspy.change_plmod_con(1000,r"""1""",r"""GENCLS""",2, 1)
 
 psspy.strt_2([0,0], OutputFilePath)
 psspy.run(0, 1, 10000,  20, 0)
-psspy.change_var(var_ppc_setp+10,85);
+psspy.change_var(var_ppc_setp + 68, 1.05)
+psspy.change_var(var_ppc_setp+10,85)
 
 psspy.run(0, 5, 10000,  20, 0)
 psspy.load_data_3(1000,r"""1""",[_i,_i,_i,_i,_i],[ 500,_f,_f,_f,_f,_f])
