@@ -122,36 +122,36 @@ psspy.run(0, 3, 1000, 1, 0)
 
 ########################  START LINE FAULT SIMULATION #########################
 TimeShift = 0;
-for i in range(0, 4):
-    for fault_type in [1]:  #range(1, 5):
 
+for fault_type in range(1, 5):
+    for i in range(0, 4):
         if i == 0:
             psspy.branch_chng_3(400, 950, r"""1""", [_i, _i, _i, _i, _i, _i],
-                                [_f, 0.204585 * 0.08, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
+                                [_f, 0.204585 * 0.001, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
                                 [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f], "")
-            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.000 * 0.001, _f, _f, _f, _f, _f, _f, _f])
-            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.0 * 0.001, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.198244 * 0.00001, _f, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.818340 * 0.00001, _f, _f, _f, _f, _f, _f])
             fault_time = 0.120
         if i == 1:
             psspy.branch_chng_3(400, 950, r"""1""", [_i, _i, _i, _i, _i, _i],
                                 [_f, 0.204585 * 0.33, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
                                 [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f], "")
-            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.000 * 0.33, _f, _f, _f, _f, _f, _f, _f])
-            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.0 * 0.33, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.198244 * 0.33, _f, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.818340 * 0.33, _f, _f, _f, _f, _f, _f])
             fault_time = 0.720
         if i == 2:
             psspy.branch_chng_3(400, 950, r"""1""", [_i, _i, _i, _i, _i, _i],
                                 [_f, 0.204585 * 1, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
                                 [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f], "")
-            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.0 * 1, _f, _f, _f, _f, _f, _f, _f])
-            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.0 * 1, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.198244 * 1, _f, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.818340 * 1, _f, _f, _f, _f, _f, _f])
             fault_time = 0.720
         if i == 3:
             psspy.branch_chng_3(400, 950, r"""1""", [_i, _i, _i, _i, _i, _i],
                                 [_f, 0.204585 * 3, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
                                 [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f], "")
-            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.0 * 3, _f, _f, _f, _f, _f, _f, _f])
-            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.0 * 3, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.198244 * 3, _f, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.818340 * 3, _f, _f, _f, _f, _f, _f])
             fault_time = 0.720
 
         psspy.run(0, 5 + TimeShift, 1000, 1, 0)
@@ -181,151 +181,101 @@ for i in range(0, 4):
 
         TimeShift = TimeShift + 5
 
-##
-##        # set figure preference
-##        mpl.rcParams['grid.color'] = 'k'
-##        mpl.rcParams['grid.linestyle'] = ':'
-##        mpl.rcParams['grid.linewidth'] = 0.5
-##        mpl.rcParams['axes.grid']='on'
-##
-##        mpl.rcParams['font.size'] = 24
-##
-##        mpl.rcParams['lines.linewidth'] = 3.0
-##
-##        mpl.rcParams['legend.fancybox'] = True
-##        mpl.rcParams['legend.numpoints'] = 3
-##        mpl.rcParams['legend.fontsize'] = 'small'
-##
-##        CurrentFig, CurrentAx = plt.subplots(2,2,sharex=False, figsize=(20,15));
-##        CurrentAx[0][0].plot(chandata['time'],chandata[2]);
-##        CurrentAx[1][0].plot(chandata['time'],chandata[3]);
-##        CurrentAx[0][1].plot(chandata['time'],chandata[4]);
-##        CurrentAx[1][1].plot(chandata['time'],chandata[5]);
-##
-##        CurrentAx[0][0].tick_params(axis='both', which='both', labelsize=24)
-##        CurrentAx[1][0].tick_params(axis='both', which='both', labelsize=24)
-##        CurrentAx[0][1].tick_params(axis='both', which='both', labelsize=24)
-##        CurrentAx[1][1].tick_params(axis='both', which='both', labelsize=24)
-##
-##        CurrentAx[0][0].set_xlim(left=4)
-##        CurrentAx[1][0].set_xlim(left=4)
-##        CurrentAx[0][1].set_xlim(left=4)
-##        CurrentAx[1][1].set_xlim(left=4)
-##
-##        CurrentAx[0][0].set_ylim([ 0,1.4])
-##        CurrentAx[1][0].set_ylim([ 0,1.3])
-##        CurrentAx[0][1].set_ylim([-5,400])
-##        CurrentAx[1][1].set_ylim([-200,200])
-##
-##        CurrentAx[0][0].set_xlabel(r"""Time/s""")
-##        CurrentAx[1][0].set_xlabel(r"""Time/s""")
-##        CurrentAx[0][1].set_xlabel(r"""Time/s""")
-##        CurrentAx[1][1].set_xlabel(r"""Time/s""")
-##
-##        CurrentAx[0][0].set_ylabel(r"""Votlage/PU""")
-##        CurrentAx[1][0].set_ylabel(r"""Voltage/PU""")
-##        CurrentAx[0][1].set_ylabel(r"""Power/MW""")
-##        CurrentAx[1][1].set_ylabel(r"""Power/MVar""")
-##
-##        CurrentAx[0][0].legend([r"""Inverter Terminal Voltage"""])
-##        CurrentAx[1][0].legend([r"""Wollar SF PoC Voltage"""])
-##        CurrentAx[0][1].legend([r"""Wollar SF P Output"""])
-##        CurrentAx[1][1].legend([r"""Wollar SF Q Output"""])
-##
-##        save_figure_name=GraphPath+"/"+'Fault-'+str(i)+' '+Fault_Equipment_Type[i]+' '+Bus_Nam[Bus_Num.index(Fault_Equipment_Start[i])]+'-'+Bus_Nam[Bus_Num.index(Fault_Equipment_End[i])]+'.png'
-##        CurrentFig.savefig(save_figure_name,format='png',dpi=150,bbox_inches='tight')
-##        plt.close(CurrentFig)
+        GraphPath = FigurePath + ClauseName + fault_name + '/'
+        if not os.path.exists(GraphPath):
+            os.makedirs(GraphPath)
 
-# start draw curves
-# new folder if necessary
-GraphPath = FigurePath + ClauseName + '/'
-if not os.path.exists(GraphPath):
-    os.makedirs(GraphPath)
+        # read data curves
+        chnfobj = dyntools.CHNF(OutputFilePath)
+        short_title, chanid, chandata = chnfobj.get_data()
 
-# read data curves
-chnfobj = dyntools.CHNF(OutputFilePath)
-short_title, chanid, chandata = chnfobj.get_data()
+        TIME = []
+        FREQ = []
+        V_INV = []
+        V_POC = []
+        P_INV = []
+        P_POC = []
+        Q_INV = []
+        Q_POC = []
 
-TIME = numpy.array(chandata['time'])
-FREQ = numpy.array(chandata[1])
-V_INV = numpy.array(chandata[2])
-V_POC = numpy.array(chandata[3])
-P_INV = numpy.array(chandata[6]) * 100
-P_POC = numpy.array(chandata[4])
-Q_INV = numpy.array(chandata[7]) * 100
-Q_POC = numpy.array(chandata[5])
+        TIME = numpy.array(chandata['time'])
+        FREQ = numpy.array(chandata[1])
+        V_INV = numpy.array(chandata[2])
+        V_POC = numpy.array(chandata[3])
+        P_INV = numpy.array(chandata[6]) * 100
+        P_POC = numpy.array(chandata[4])
+        Q_INV = numpy.array(chandata[7]) * 100
+        Q_POC = numpy.array(chandata[5])
 
-numpy.savetxt(GraphPath + TestName+ 'PSSE Fault.csv', numpy.transpose([TIME, FREQ, V_INV, V_POC, P_INV, P_POC, Q_INV, Q_POC]),
-              delimiter=',')
+        numpy.savetxt(GraphPath + fault_name +TestName+ 'PSSE Fault.csv', numpy.transpose([TIME, FREQ, V_INV, V_POC, P_INV, P_POC, Q_INV, Q_POC]),
+                      delimiter=',')
 
-# set figure preference
-mpl.rcParams['grid.color'] = 'k'
-mpl.rcParams['grid.linestyle'] = ':'
-mpl.rcParams['grid.linewidth'] = 0.5
-mpl.rcParams['axes.grid'] = 'on'
+        # set figure preference
+        mpl.rcParams['grid.color'] = 'k'
+        mpl.rcParams['grid.linestyle'] = ':'
+        mpl.rcParams['grid.linewidth'] = 0.5
+        mpl.rcParams['axes.grid'] = 'on'
 
-mpl.rcParams['font.size'] = 22
+        mpl.rcParams['font.size'] = 22
 
-mpl.rcParams['lines.linewidth'] = 3.0
+        mpl.rcParams['lines.linewidth'] = 3.0
 
-mpl.rcParams['legend.fancybox'] = True
-mpl.rcParams['legend.numpoints'] = 3
-mpl.rcParams['legend.fontsize'] = 'small'
-mpl.rcParams['legend.loc'] = 'lower right'
+        mpl.rcParams['legend.fancybox'] = True
+        mpl.rcParams['legend.numpoints'] = 3
+        mpl.rcParams['legend.fontsize'] = 'small'
+        mpl.rcParams['legend.loc'] = 'lower right'
 
-CurrentFig, CurrentAx = plt.subplots(3, 2, sharex=False, figsize=(20, 15));
-CurrentAx[0][0].plot(chandata['time'], P_INV);
-CurrentAx[1][0].plot(chandata['time'], Q_INV);
-CurrentAx[2][0].plot(chandata['time'], V_INV);
-CurrentAx[0][1].plot(chandata['time'], P_POC);
-CurrentAx[1][1].plot(chandata['time'], Q_POC);
-CurrentAx[2][1].plot(chandata['time'], V_POC);
+        CurrentFig, CurrentAx = plt.subplots(3, 2, sharex=False, figsize=(20, 15));
+        CurrentAx[0][0].plot(chandata['time'], P_INV);
+        CurrentAx[1][0].plot(chandata['time'], Q_INV);
+        CurrentAx[2][0].plot(chandata['time'], V_INV);
+        CurrentAx[0][1].plot(chandata['time'], P_POC);
+        CurrentAx[1][1].plot(chandata['time'], Q_POC);
+        CurrentAx[2][1].plot(chandata['time'], V_POC);
 
-CurrentAx[0][0].tick_params(axis='both', which='both', labelsize=24)
-CurrentAx[1][0].tick_params(axis='both', which='both', labelsize=24)
-CurrentAx[2][0].tick_params(axis='both', which='both', labelsize=24)
-CurrentAx[0][1].tick_params(axis='both', which='both', labelsize=24)
-CurrentAx[1][1].tick_params(axis='both', which='both', labelsize=24)
-CurrentAx[2][1].tick_params(axis='both', which='both', labelsize=24)
+        CurrentAx[0][0].tick_params(axis='both', which='both', labelsize=24)
+        CurrentAx[1][0].tick_params(axis='both', which='both', labelsize=24)
+        CurrentAx[2][0].tick_params(axis='both', which='both', labelsize=24)
+        CurrentAx[0][1].tick_params(axis='both', which='both', labelsize=24)
+        CurrentAx[1][1].tick_params(axis='both', which='both', labelsize=24)
+        CurrentAx[2][1].tick_params(axis='both', which='both', labelsize=24)
 
-CurrentAx[0][0].set_xlim(left=0)
-CurrentAx[1][0].set_xlim(left=0)
-CurrentAx[2][0].set_xlim(left=0)
-CurrentAx[0][1].set_xlim(left=0)
-CurrentAx[1][1].set_xlim(left=0)
-CurrentAx[2][1].set_xlim(left=0)
+        CurrentAx[0][0].set_xlim(left=0)
+        CurrentAx[1][0].set_xlim(left=0)
+        CurrentAx[2][0].set_xlim(left=0)
+        CurrentAx[0][1].set_xlim(left=0)
+        CurrentAx[1][1].set_xlim(left=0)
+        CurrentAx[2][1].set_xlim(left=0)
 
-CurrentAx[0][0].set_ylim([0, 120])
-CurrentAx[1][0].set_ylim([-60, 80])
-CurrentAx[2][0].set_ylim([0.0, 1.4])
-CurrentAx[0][1].set_ylim([-5, 200])
-CurrentAx[1][1].set_ylim([-100, 120])
-CurrentAx[2][1].set_ylim([0.0, 1.4])
+        CurrentAx[0][0].set_ylim([0, 120])
+        CurrentAx[1][0].set_ylim([-60, 80])
+        CurrentAx[2][0].set_ylim([0.0, 1.4])
+        CurrentAx[0][1].set_ylim([-5, 200])
+        CurrentAx[1][1].set_ylim([-100, 120])
+        CurrentAx[2][1].set_ylim([0.0, 1.4])
 
-# CurrentAx[0][0].set_xlabel(r"""Time/s""")
-# CurrentAx[1][0].set_xlabel(r"""Time/s""")
-CurrentAx[2][0].set_xlabel(r"""Time/s""")
-# CurrentAx[0][1].set_xlabel(r"""Time/s""")
-# CurrentAx[1][1].set_xlabel(r"""Time/s""")
-CurrentAx[2][1].set_xlabel(r"""Time/s""")
+        # CurrentAx[0][0].set_xlabel(r"""Time/s""")
+        # CurrentAx[1][0].set_xlabel(r"""Time/s""")
+        CurrentAx[2][0].set_xlabel(r"""Time/s""")
+        # CurrentAx[0][1].set_xlabel(r"""Time/s""")
+        # CurrentAx[1][1].set_xlabel(r"""Time/s""")
+        CurrentAx[2][1].set_xlabel(r"""Time/s""")
 
-CurrentAx[0][0].set_ylabel(r"""P/MW""")
-CurrentAx[1][0].set_ylabel(r"""Q/MVar""")
-CurrentAx[2][0].set_ylabel(r"""U/PU""")
-# CurrentAx[0][1].set_ylabel(r"""P_Poc/MW""")
-# CurrentAx[1][1].set_ylabel(r"""Q_Poc/MVar""")
-# CurrentAx[2][1].set_ylabel(r"""U_Poc/PU""")
+        CurrentAx[0][0].set_ylabel(r"""P/MW""")
+        CurrentAx[1][0].set_ylabel(r"""Q/MVar""")
+        CurrentAx[2][0].set_ylabel(r"""U/PU""")
+        # CurrentAx[0][1].set_ylabel(r"""P_Poc/MW""")
+        # CurrentAx[1][1].set_ylabel(r"""Q_Poc/MVar""")
+        # CurrentAx[2][1].set_ylabel(r"""U_Poc/PU""")
 
-CurrentAx[0][0].legend([r"""Inverter P_gen"""])
-CurrentAx[1][0].legend([r"""Inverter Q_gen"""])
-CurrentAx[2][0].legend([r"""Inverter E_terminal"""])
-CurrentAx[0][1].legend([r"""WISF P Injection"""])
-CurrentAx[1][1].legend([r"""WISF Q Injection"""])
-CurrentAx[2][1].legend([r"""WISF PoC Voltage"""])
-# CurrentAx[2][1].legend([r"""WDSF PoC Voltage"""])
+        CurrentAx[0][0].legend([r"""Inverter P_gen"""])
+        CurrentAx[1][0].legend([r"""Inverter Q_gen"""])
+        CurrentAx[2][0].legend([r"""Inverter E_terminal"""])
+        CurrentAx[0][1].legend([r"""WISF P Injection"""])
+        CurrentAx[1][1].legend([r"""WISF Q Injection"""])
+        CurrentAx[2][1].legend([r"""WISF PoC Voltage"""])
+        # CurrentAx[2][1].legend([r"""WDSF PoC Voltage"""])
 
-save_figure_name = GraphPath + "/" +TestName+ ClauseName + '-' + '.png'
-CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
-plt.close(CurrentFig)
-raw_input("Press enter to exit...")
-redirect.reset()
+        save_figure_name = GraphPath +TestName+ fault_name + '-' + '.png'
+        CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
+        plt.close(CurrentFig)
