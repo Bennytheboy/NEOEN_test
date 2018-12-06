@@ -63,9 +63,10 @@ psspy.case(GridInfoPath + file_name + ".sav")
 # psspy.rstr(GridInfoPath+file_name+".snp")
 psspy.resq(GridInfoPath + "/" + file_name + ".seq")
 psspy.dyre_new([1, 1, 1, 1], GridInfoPath + "/" + file_name + ".dyr", "", "", "")
-psspy.addmodellibrary(HuaweiModelPath + 'HWS2000_psse34.dll')
-psspy.addmodellibrary(HuaweiModelPath + 'MOD_GPM_PPC_V13_34.dll')
-psspy.addmodellibrary(HuaweiModelPath + 'MOD_GPM_SB_V7.dll')
+psspy.addmodellibrary(HuaweiModelPath+'HWS2000_psse34_V1.5.dll')
+psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_PPC_V13_34_V3.dll')
+psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_SB_V7.dll')
+
 psspy.dynamics_solution_param_2([_i, _i, _i, _i, _i, _i, _i, _i], [0.3, _f, 0.001, 0.004, _f, _f, _f, _f])
 psspy.machine_data_2(500, r"""1""", [_i, _i, _i, _i, _i, _i],
                      [86, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f])
@@ -118,6 +119,35 @@ psspy.bsys(0, 0, [0.4, 500.], 0, [], 0, [], 0, [], 0, [])
 
 # psspy.plmod_status(500,r"""1""",6,0)
 # psspy.plmod_status(500,r"""1""",3,0)
+# psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",26, 0.85)
+# psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",27, 1.15)
+# psspy.change_plmod_icon(500,r"""1""",r"""HWS2000""",2,1) # disable PF function of the inverter
+# psspy.plmod_status(500,r"""1""",6,0) # disable PPC
+
+
+psspy.change_plmod_icon(500,r"""1""",r"""HWS2000""",1,0)
+psspy.change_plmod_icon(500,r"""1""",r"""HWS2000""",2,0)
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",16, 6)
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",17, 6)
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",33, 50.15)
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",34, 52.0)
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",35, 50.2)
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",36, 20.0)
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",37, 49.85)
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",38, 47.0)
+psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",8,1)
+psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",9,1)
+# this is for the votlage control
+psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",1,20)   #ori=5
+psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",2,20)   #ori=5
+psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",3,50)   #ori=5
+psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",4,2)    #ori=3
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",23, 0.003)  #ori=0.003
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",24, 0.5)   # droop  ori=5%
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",2, 0.02)   #  proportional gain  ori=0.001
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",3, 0.25)   # integral gain  ori=0.15
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",5, 0.5)  #PPC reactive power UB   #ori=1
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",6, -0.3)  #PPC reactive power LB   #ori=1
 
 
 psspy.strt_2([0, 0], OutputFilePath)
@@ -125,9 +155,9 @@ psspy.run(0, 0.2, 1000, 1, 0)
 psspy.change_var(var_ppc_setp + 68, 1.05)
 psspy.change_var(var_ppc_setp + 10, 85)
 # psspy.change_var(var_ppc_setp + 11, 0)
-psspy.run(0, 0.9, 1000, 1, 0)
+psspy.run(0, 5, 1000, 1, 0)
 
-for fault_type in [4]:
+for fault_type in [1]:
 
     # psspy.change_var(var_ppc_setp + 68, 1.05)
     # psspy.run(0, 3, 1000, 1, 0)
@@ -135,10 +165,10 @@ for fault_type in [4]:
     for i in range(0, 4):
         if i == 0:
             psspy.branch_chng_3(400, 950, r"""1""", [_i, _i, _i, _i, _i, _i],
-                                [_f, 0.204585 * 0.000001, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
+                                [_f, 0.204585 * 0.01, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f],
                                 [_f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f, _f], "")
-            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.198244 * 0.000001, _f, _f, _f, _f, _f, _f, _f])
-            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.818340 * 0.000001, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.198244 * 0.01, _f, _f, _f, _f, _f, _f, _f])
+            psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.818340 * 0.01, _f, _f, _f, _f, _f, _f])
             # psspy.seq_branch_data_3(400, 950, r"""1""", _i, [0.0 * 0.00001, _f, _f, _f, _f, _f, _f, _f])
             # psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.0 * 0.00001, _f, _f, _f, _f, _f, _f])
             # fault_time = 0.120
@@ -170,7 +200,7 @@ for fault_type in [4]:
             # psspy.seq_branch_data_3(400, 950, r"""1""", _i, [_f, 0.0 * 0.00001, _f, _f, _f, _f, _f, _f])
             # fault_time = 0.720
 
-        psspy.run(0, 1 + TimeShift, 1000, 1, 0)
+        psspy.run(0, 5 + TimeShift, 1000, 1, 0)
 
         if fault_type == 1:  # three phase
             fault_name = 'ThreePhase'
@@ -194,7 +224,7 @@ for fault_type in [4]:
             fault_name = 'TwoPhaseGround'
             fault_time = 0.720
 
-        psspy.run(0, 1.0 + fault_time + TimeShift, 1000, 1, 0)
+        psspy.run(0, 5.0 + fault_time + TimeShift, 1000, 1, 0)
         psspy.dist_clear_fault(1)
         psspy.run(0, 5.000 + TimeShift, 1000, 1, 0)
 
@@ -219,7 +249,7 @@ for fault_type in [4]:
     # FREQ_3 = numpy.array(chandata[9])
     # FREQ_4 = numpy.array(chandata[10])
 
-    numpy.savetxt(GraphPath + fault_name +TestName+ '_PSSE Fault.csv', numpy.transpose([TIME, FREQ, V_INV, V_POC, P_INV, P_POC, Q_INV, Q_POC]), delimiter=',')
+    numpy.savetxt(GraphPath + fault_name +TestName+ '_PSSE Fault_1.csv', numpy.transpose([TIME, FREQ, V_INV, V_POC, P_INV, P_POC, Q_INV, Q_POC]), delimiter=',')
 
     # set figure preference
     mpl.rcParams['grid.color'] = 'k'
@@ -287,7 +317,7 @@ for fault_type in [4]:
     CurrentAx[2][1].legend([r"""WISF PoC Voltage"""])
     # CurrentAx[2][1].legend([r"""WDSF PoC Voltage"""])
 
-    save_figure_name = GraphPath +TestName+ fault_name + '-' + '.png'
+    save_figure_name = GraphPath +TestName+ fault_name + '-1' + '.png'
     CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
     plt.close(CurrentFig)
 

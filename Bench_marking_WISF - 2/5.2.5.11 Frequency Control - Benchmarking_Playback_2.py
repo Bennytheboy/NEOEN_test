@@ -126,7 +126,8 @@ if not os.path.exists(GraphPath):
         os.makedirs(GraphPath)
 
 # read data curves
-chnfobj = dyntools.CHNF('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/D_SimplifiedSystem/test_5.outx')
+# chnfobj = dyntools.CHNF('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/D_SimplifiedSystem/test_5.outx')
+chnfobj = dyntools.CHNF('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/D_SimplifiedSystem/FC_PPC_3.outx')
 short_title, chanid, chandata = chnfobj.get_data()
 freq_data=numpy.array(chandata[8])
 
@@ -161,10 +162,10 @@ CurrentAx[1][0].tick_params(axis='both', which='both', labelsize=24)
 CurrentAx[0][1].tick_params(axis='both', which='both', labelsize=24)
 CurrentAx[1][1].tick_params(axis='both', which='both', labelsize=24)
 
-CurrentAx[0][0].set_xlim([0,25])
-CurrentAx[1][0].set_xlim([0,25])
-CurrentAx[0][1].set_xlim([0,25])
-CurrentAx[1][1].set_xlim([0,25])
+CurrentAx[0][0].set_xlim([0,65])
+CurrentAx[1][0].set_xlim([0,65])
+CurrentAx[0][1].set_xlim([0,65])
+CurrentAx[1][1].set_xlim([0,65])
 
 CurrentAx[0][0].set_ylim([0.8,1.2])
 
@@ -190,12 +191,12 @@ CurrentAx[1][0].legend([r"""System Frequency"""])
 CurrentAx[0][1].legend([r"""WISF P Output"""])
 CurrentAx[1][1].legend([r"""WISF Q Output"""])
 
-save_figure_name=GraphPath + "/" +TestName + '-2' + '.png'
+save_figure_name=GraphPath + "/" +TestName + '-4' + '.png'
 CurrentFig.savefig(save_figure_name,format='png',dpi=150,bbox_inches='tight')
 plt.close(CurrentFig)
 
 # read data curves
-chnfobj = dyntools.CHNF('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/D_SimplifiedSystem/test_5.outx')
+chnfobj = dyntools.CHNF('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/D_SimplifiedSystem/FC_PPC_3.outx')
 short_title, chanid, chandata = chnfobj.get_data()
 
 TIME=numpy.array(chandata['time'])
@@ -209,7 +210,7 @@ Q_POC=numpy.array(chandata[5])
 V_SET=numpy.array(chandata[8])
 P_SET=numpy.array(chandata[8])
 
-numpy.savetxt(GraphPath+"/"+'PSSE Frequency Control_3.csv', numpy.transpose([TIME,FREQ,V_INV,V_POC,P_INV,P_POC,Q_INV,Q_POC,V_SET,P_SET]), delimiter=',')
+numpy.savetxt(GraphPath+"/"+'PSSE Frequency Control_4.csv', numpy.transpose([TIME,FREQ,V_INV,V_POC,P_INV,P_POC,Q_INV,Q_POC,V_SET,P_SET]), delimiter=',')
 
 raw_input("Press enter to exit...")
 redirect.reset()

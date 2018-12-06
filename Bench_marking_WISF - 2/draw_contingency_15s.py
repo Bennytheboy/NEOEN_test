@@ -24,7 +24,7 @@ import dyntools
 
 
 test_name = 'Contingency'
-plot_fault = 4  # 1=threephase 2=single pahse 3=phase-phase 4=phase-phase-ground
+plot_fault = 2  # 1=threephase 2=single pahse 3=phase-phase 4=phase-phase-ground
 if plot_fault == 1:
     fault_name ='three Phase'
 if plot_fault == 2:
@@ -208,21 +208,21 @@ mpl.rcParams['legend.fontsize'] = 'small'
 mpl.rcParams['legend.loc'] = 'lower right'
 
 CurrentFig, CurrentAx = plt.subplots(3, 2, sharex=False, figsize=(20, 20))
-CurrentAx[0][0].plot(t_TIME_PSCAD, t_V_INV_PSCAD);
-CurrentAx[1][0].plot(t_TIME_PSCAD, t_P_INV_PSCAD*1760);
-CurrentAx[2][0].plot(t_TIME_PSCAD, t_Q_INV_PSCAD*1760);
-CurrentAx[0][1].plot(t_TIME_PSCAD, t_V_POC_PSCAD);
-CurrentAx[1][1].plot(t_TIME_PSCAD, t_P_POC_PSCAD);
-CurrentAx[2][1].plot(t_TIME_PSCAD, t_Q_POC_PSCAD);
+CurrentAx[0][0].plot(t_TIME_PSCAD, t_V_INV_PSCAD, '--', alpha=0.8, linewidth=3.0);
+CurrentAx[1][0].plot(t_TIME_PSCAD, t_P_INV_PSCAD*1760, '--', alpha=0.8, linewidth=3.0);
+CurrentAx[2][0].plot(t_TIME_PSCAD, t_Q_INV_PSCAD*1760, '--', alpha=0.8, linewidth=3.0);
+CurrentAx[0][1].plot(t_TIME_PSCAD, t_V_POC_PSCAD, '--', alpha=0.8, linewidth=3.0);
+CurrentAx[1][1].plot(t_TIME_PSCAD, t_P_POC_PSCAD)#, '--', alpha=0.8, linewidth=3.0);
+CurrentAx[2][1].plot(t_TIME_PSCAD, t_Q_POC_PSCAD)#, '--', alpha=0.8, linewidth=3.0);
 
-CurrentAx[0][0].plot(t_TIME_PSSE, t_V_INV_PSSE)
-CurrentAx[1][0].plot(t_TIME_PSSE, t_P_INV_PSSE)
-CurrentAx[2][0].plot(t_TIME_PSSE, t_Q_INV_PSSE)
+CurrentAx[0][0].plot(t_TIME_PSSE, t_V_INV_PSSE, '--', alpha=0.8, linewidth=3.0)
+CurrentAx[1][0].plot(t_TIME_PSSE, t_P_INV_PSSE, '--', alpha=0.8, linewidth=3.0)
+CurrentAx[2][0].plot(t_TIME_PSSE, t_Q_INV_PSSE, '--', alpha=0.8, linewidth=3.0)
 # CurrentAx[0][1].plot(t_TIME_PSSE, t_V_SET_PSSE,color='orange',linestyle='--')
-CurrentAx[0][1].plot(t_TIME_PSSE, t_V_POC_PSSE)
+CurrentAx[0][1].plot(t_TIME_PSSE, t_V_POC_PSSE, '--', alpha=0.8, linewidth=3.0)
 # CurrentAx[1][1].plot(t_TIME_PSSE, t_P_SET_PSSE,color='green',linestyle='--')
-CurrentAx[1][1].plot(t_TIME_PSSE, t_P_POC_PSSE)
-CurrentAx[2][1].plot(t_TIME_PSSE, t_Q_POC_PSSE)
+CurrentAx[1][1].plot(t_TIME_PSSE, t_P_POC_PSSE, '--', alpha=0.8, linewidth=3.0)
+CurrentAx[2][1].plot(t_TIME_PSSE, t_Q_POC_PSSE, '--', alpha=0.8, linewidth=3.0)
 
 CurrentAx[0][0].tick_params(axis='both', which='both', labelsize=18)
 CurrentAx[1][0].tick_params(axis='both', which='both', labelsize=18)
@@ -238,13 +238,13 @@ CurrentAx[0][1].set_xlim([15, 20])
 CurrentAx[1][1].set_xlim([15, 20])
 CurrentAx[2][1].set_xlim([15, 20])
 
-CurrentAx[0][0].set_ylim([0.0, 1.15])
-CurrentAx[0][1].set_ylim([0.0, 1.15])
-CurrentAx[1][0].set_ylim([0, 125])
-CurrentAx[1][1].set_ylim([0, 125])
+CurrentAx[0][0].set_ylim([0.7, 1.15])
+CurrentAx[0][1].set_ylim([0.6, 3.05])
+CurrentAx[1][0].set_ylim([70, 105])
+CurrentAx[1][1].set_ylim([50, 105])
 # CurrentAx[1][1].set_yticks([0, 150])
-CurrentAx[2][0].set_ylim([-50, 100])
-CurrentAx[2][1].set_ylim([-50, 100])
+CurrentAx[2][0].set_ylim([-20, 40])
+CurrentAx[2][1].set_ylim([-40, 20])
 # CurrentAx[2][1].set_yticks([-200, -150, -110.6, -50, 0, 50, 110.6, 150, 200])
 
 CurrentAx[0][0].set_xlabel(r"""TIME/s""")
@@ -273,7 +273,7 @@ CurrentAx[2][1].legend(["PSCAD", "PSSE"])
 # CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
 # plt.close(CurrentFig)
 
-save_figure_name = 'F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/5.5.5.5_' + fault_name+'_02.png'
+save_figure_name = 'F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/rev1/5.5.5.5_' + fault_name+'_02.png'
 CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
 plt.close(CurrentFig)
 raw_input("Press enter to exit...")

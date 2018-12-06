@@ -41,7 +41,7 @@ psspy.psseinit(50000)
 # TestName ="5.2.5.5_contingency"
 
 
-for fault_type in [4]:
+for fault_type in [1]:
     # on desktop
     LoadScenario = "SimplifiedSystem"
     ClauseName = "Benchmarking"

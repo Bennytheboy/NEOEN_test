@@ -33,7 +33,7 @@ psspy.psseinit(50000)
 
 # Set Simulation Path.
 LoadScenario="SimplifiedSystem"
-ClauseName="Benchmarking_droop_VP"
+ClauseName="Benchmarking_vsetp_VP"
 ProgramPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/P_SimulationProgram/"
 GridInfoPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/"+"D_"+LoadScenario+"/"
 HuaweiModelPath="F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/D_HuaweiModels/"
@@ -52,8 +52,8 @@ if LoadScenario=="SimplifiedSystem":
 psspy.case(GridInfoPath+file_name+".sav")
 psspy.resq(GridInfoPath  + "/" + file_name + ".seq")
 psspy.dyre_new([1, 1, 1, 1], GridInfoPath  + "/" + file_name + ".dyr", "", "", "")
-psspy.addmodellibrary(HuaweiModelPath+'HWS2000_psse34.dll')
-psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_PPC_V13_34.dll')
+psspy.addmodellibrary(HuaweiModelPath+'HWS2000_psse34_V1.5.dll')
+psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_PPC_V13_34_V3.dll')
 psspy.addmodellibrary(HuaweiModelPath+'MOD_GPM_SB_V7.dll')
 psspy.plant_chng_3(500,0,_i,[ 1.05,_f])
 psspy.plant_chng_3(1000,0,_i,[ 1.045,_f])
@@ -67,12 +67,30 @@ psspy.fnsl([0,0,0,1,0,0,99,0])
 
 # convert load , do not change
 psspy.cong(0)
+psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",1,20)   #ori=5
+psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",2,20)   #ori=5
+psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",3,50)   #ori=5
+psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",4,2)    #ori=3
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",23, 0.003)  #ori=0.003
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",24, 0.5)   # droop  ori=5%
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",2, 0.02)   #  proportional gain  ori=0.001
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",3, 0.25)   # integral gain  ori=0.15
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",5, 0.5)  #PPC reactive power UB   #ori=1
+psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",6, -0.3)  #PPC reactive power LB   #ori=1
+
+# psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",7, 0.01)  ##ramp up
+
+# psspy.change_plmod_con(500,r"""1""",r"""HWS2000""",13,-0.46)
+# psspy.change_plmod_con(500,r"""1""",r"""HWS2000""",14,0.46)
+
+
 psspy.bus_frequency_channel([1,1000],r"""System frequency""")
 ierr=psspy.machine_array_channel([2,4,500],r"""1""",r"""Inverter Terminal Voltage""")
 ierr=psspy.voltage_channel([3,-1,-1,800],r"""WISF PoC Voltage""")
 psspy.branch_p_and_q_channel([4,-1,-1,800,900],r"""1""",[r"""P Injection""",r"""Q Injection"""])
-ierr=psspy.machine_array_channel([6,2,500],r"""1""",r"""Pelec Inverter""")
-ierr=psspy.machine_array_channel([7,3,500],r"""1""",r"""Qelec Inverter""")
+psspy.branch_p_and_q_channel([6,-1,-1,500,600],r"""1""",[r"""P inv""",r"""Q inv"""])
+# ierr=psspy.machine_array_channel([6,2,500],r"""1""",r"""Pelec Inverter""")
+# ierr=psspy.machine_array_channel([7,3,500],r"""1""",r"""Qelec Inverter""")
 [ierr, var_ppc_conp] = psspy.mdlind(500, '1', 'EXC', 'CON')
 [ierr, var_ppc_setp] = psspy.mdlind(500, '1', 'EXC', 'VAR')
 [ierr, var_ppc_mode] = psspy.mdlind(500, '1', 'EXC', 'ICON')
@@ -80,19 +98,16 @@ ierr=psspy.machine_array_channel([7,3,500],r"""1""",r"""Qelec Inverter""")
 [ierr, var_inv1_var]=  psspy.mdlind(500,'1','GEN','VAR')
 [ierr, var_inv1_mod]=  psspy.mdlind(500,'1','GEN','ICON')
 
-pp_g=0.01 #0.01
-i_g=0.05
-
 ierr=psspy.var_channel([8,var_ppc_setp+68],"Voltage Setpoint")
 ierr=psspy.var_channel([9,var_ppc_setp+10],"Active Power Setpoint")
-psspy.branch_p_and_q_channel([11,-1,-1,500,600],r"""1""",[r"""P gen""",r"""Q Gen"""])
 
-psspy.change_con(var_ppc_conp+1, pp_g)  #Proportional gain of reactive power PI controller 0.001 0.05
-psspy.change_con(var_ppc_conp+2, i_g)  # Integral gain of reactive power PI controller 0.015  0.4
-psspy.change_con(var_ppc_conp+23, 0.4)  # Integral gain of reactive power PI controller 0.015  0.4
+#
+# psspy.change_con(var_ppc_conp+1, pp_g)  #Proportional gain of reactive power PI controller 0.001 0.05
+# psspy.change_con(var_ppc_conp+2, i_g)  # Integral gain of reactive power PI controller 0.015  0.4
+# psspy.change_con(var_ppc_conp+23, 0.4)  # Integral gain of reactive power PI controller 0.015  0.4
 # psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",2, 0.002)
 # psspy.change_plmod_con(500,r"""1""",r"""GPMPPC""",3, 0.3)
-psspy.change_plmod_icon(500,r"""1""",r"""GPMPPC""",4,2)
+
 
 # psspy.change_con(var_ppc_conp+4, 0.5)
 # psspy.change_con(var_ppc_conp+5,-0.5)
@@ -123,16 +138,14 @@ psspy.strt_2([0,0], OutputFilePath)
 psspy.run(0, 1, 1000,  1, 0)
 psspy.change_var(var_ppc_setp+68, 1.05)
 psspy.change_var(var_ppc_setp+10, 85)
-# psspy.run(0, 4, 1000,  1, 0)
-#
-# psspy.change_var(var_ppc_setp+68,1.05)
-# psspy.change_var(var_ppc_setp+10, 85)
-psspy.run(0, 5,  1000,  1, 0)
-psspy.change_var(var_ppc_setp+68,1.02)
+psspy.run(0, 2,  1000,  1, 0)
+psspy.change_var(var_ppc_setp+68, 1.03)
+psspy.run(0, 5, 1000,  1, 0)
+psspy.change_var(var_ppc_setp+68, 1.08)
+psspy.run(0, 10, 1000,  1, 0)
+psspy.change_var(var_ppc_setp+68, 1.03)
 psspy.run(0, 15, 1000,  1, 0)
-psspy.change_var(var_ppc_setp+68,1.05)
 
-psspy.run(0, 25, 1000,  1, 0)
 # psspy.change_var(var_ppc_setp+68,1.01)
 # psspy.run(0, 35, 1000,  1, 0)
 # psspy.change_var(var_ppc_setp+68,0.985)
@@ -177,10 +190,10 @@ FREQ=numpy.array(chandata[1])
 V_INV=numpy.array(chandata[2])
 V_POC=numpy.array(chandata[3])
 # P_INV=numpy.array(chandata[6])*96.8
-P_INV=numpy.array(chandata[11])
+P_INV=numpy.array(chandata[6])
 P_POC=numpy.array(chandata[4])
 # Q_INV=numpy.array(chandata[7])*96.8
-Q_INV=numpy.array(chandata[12])
+Q_INV=numpy.array(chandata[7])
 Q_POC=numpy.array(chandata[5])
 V_SET=numpy.array(chandata[8])
 P_SET=numpy.array(chandata[9])
@@ -255,6 +268,7 @@ CurrentAx[1][1].legend([r"""WISF Q Injection"""])
 CurrentAx[2][1].legend([r"""WISF PoC Voltage_setpoint""", r"""WISF PoC Voltage"""])
 # CurrentAx[2][1].legend([r"""WDSF PoC Voltage"""])
 
-save_figure_name = GraphPath + "/" +TestName + '-'+str(pp_g)+'_' + str(i_g)+'_' + '.png'
+# save_figure_name = GraphPath + "/" +TestName + '-'+str(pp_g)+'_' + str(i_g)+'_' + '.png'
+save_figure_name = GraphPath + "/" +TestName +'_' + '.png'
 CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
 plt.close(CurrentFig)

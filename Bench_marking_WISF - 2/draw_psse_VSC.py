@@ -36,7 +36,7 @@ U_set_psse = []
 P_set_psse = []
 
 #[TIME, FREQ, V_INV, V_POC, P_INV, P_POC, Q_INV, Q_POC]),
-with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/Benchmarking_droop_VP/' + 'PSSE Voltage Setpoint.csv', 'rb') as t_file:
+with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/\Benchmarking_vsetp_VP/' + 'PSSE Voltage Setpoint.csv', 'rb') as t_file:
     FileData = csv.reader(t_file)
     FileData = list(FileData)
 for t_entry in range(0, len(FileData)):
@@ -67,22 +67,49 @@ U_inv_pscad = []
 P_poc_pscad = []
 Q_poc_pscad = []
 U_poc_pscad = []
+v_set_pscad=  []
 
-with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/Test08_VoltageDroop/Voltagedroop_01.txt') as f1:
-    lines1 = f1.readlines()
-    time_pscad      = [float(line.split()[0]) for line in lines1]
-    F_sys_pscad = [float(line.split()[1]) for line in lines1]
-    U_poc_pscad = [float(line.split()[2]) for line in lines1]
-    P_inv_pscad = [float(line.split()[3]) for line in lines1]
-    Q_inv_pscad = [float(line.split()[8]) for line in lines1]
-    U_inv_pscad = [float(line.split()[10]) for line in lines1]
-with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/Test08_VoltageDroop/Voltagedroop_02.txt') as f2:
-    lines2 = f2.readlines()
-    v_set_pscad = [float(line.split()[6]) for line in lines2]
-    Q_poc_pscad = [float(line.split()[9]) for line in lines2]
-with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/Test08_VoltageDroop/Voltagedroop_03.txt') as f3:
-    lines3 = f3.readlines()
-    P_poc_pscad = [float(line.split()[2]) for line in lines3]
+# # with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/Test08_VoltageDroop/Voltagedroop_01.txt') as f1:
+# with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/Test08_VoltageDroop/VoltageReference_Update_01.txt') as f1:
+#     lines1 = f1.readlines()
+#     # time_pscad      = [float(line.split()[0]) for line in lines1]
+#     # F_sys_pscad = [float(line.split()[1]) for line in lines1]
+#     # U_poc_pscad = [float(line.split()[2]) for line in lines1]
+#     # P_inv_pscad = [float(line.split()[3]) for line in lines1]
+#     # Q_inv_pscad = [float(line.split()[8]) for line in lines1]
+#     # U_inv_pscad = [float(line.split()[10]) for line in lines1]
+#
+#     time_pscad      = [float(line.split()[0]) for line in lines1]
+#     F_sys_pscad = [float(line.split()[1]) for line in lines1]
+#     U_poc_pscad = [float(line.split()[2]) for line in lines1]
+#     P_inv_pscad = [float(line.split()[6]) for line in lines1]
+#     Q_inv_pscad = [float(line.split()[8]) for line in lines1]
+#     U_inv_pscad = [float(line.split()[10]) for line in lines1]
+# # with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/Test08_VoltageDroop/Voltagedroop_02.txt') as f2:
+# with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/Test08_VoltageDroop/VoltageReference_Update_02.txt') as f2:
+#     lines2 = f2.readlines()
+#     v_set_pscad = [float(line.split()[6]) for line in lines2]
+#     Q_poc_pscad = [float(line.split()[9]) for line in lines2]
+# # with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/Test08_VoltageDroop/Voltagedroop_03.txt') as f3:
+# with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/Test08_VoltageDroop/VoltageReference_Update_03.txt') as f3:
+#     lines3 = f3.readlines()
+#     P_poc_pscad = [float(line.split()[2]) for line in lines3]
+
+
+with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/chang_PSCAD/' + 'Vol_setpoint_chang.csv', 'rb') as t_file:
+    FileData = csv.reader(t_file)
+    FileData = list(FileData)
+for t_entry in range(1, len(FileData)-1):
+    time_pscad.append(numpy.round(float(FileData[t_entry][0]),4))
+    U_inv_pscad.append(float(FileData[t_entry][13]))
+    U_poc_pscad.append(float(FileData[t_entry][11]))
+    P_inv_pscad.append(float(FileData[t_entry][4]))
+    P_poc_pscad.append(float(FileData[t_entry][1]))
+    Q_inv_pscad.append(float(FileData[t_entry][8]))
+    Q_poc_pscad.append(float(FileData[t_entry][6]))
+    v_set_pscad.append(float(FileData[t_entry][12]))
+    # F_sys_pscad.append(float(FileData[t_entry][15]))
+
 
 TIME_PSCAD_start_index = (numpy.abs(time_pscad)).argmin()
 TIME_PSCAD_end_index = (numpy.abs(time_pscad)).argmax()
@@ -123,22 +150,22 @@ mpl.rcParams['legend.numpoints'] = 3
 mpl.rcParams['legend.fontsize'] = 'small'
 
 CurrentFig, CurrentAx = plt.subplots(3, 2, sharex=False, figsize=(20, 20))
-CurrentAx[0][0].plot(t_TIME_PSCAD, t_V_INV_PSCAD);
-CurrentAx[1][0].plot(t_TIME_PSCAD, t_P_INV_PSCAD);
-CurrentAx[2][0].plot(t_TIME_PSCAD, t_Q_INV_PSCAD);
-CurrentAx[0][1].plot(t_TIME_PSCAD, t_V_SET_PSCAD,color='orange',linestyle='--')
-CurrentAx[0][1].plot(t_TIME_PSCAD, t_V_POC_PSCAD);
-CurrentAx[1][1].plot(t_TIME_PSCAD, t_P_POC_PSCAD);
-CurrentAx[2][1].plot(t_TIME_PSCAD, t_Q_POC_PSCAD);
+CurrentAx[0][0].plot(t_TIME_PSCAD, t_V_INV_PSCAD,'--', alpha=0.8, linewidth=3.0);
+CurrentAx[1][0].plot(t_TIME_PSCAD, t_P_INV_PSCAD, '--', alpha=0.8, linewidth=3.0);
+CurrentAx[2][0].plot(t_TIME_PSCAD, t_Q_INV_PSCAD, '--', alpha=0.8, linewidth=3.0);
+CurrentAx[0][1].plot(t_TIME_PSCAD, t_V_SET_PSCAD,color='green',linestyle='--')
+CurrentAx[0][1].plot(t_TIME_PSCAD, t_V_POC_PSCAD,'--', alpha=0.8, linewidth=3.0);
+CurrentAx[1][1].plot(t_TIME_PSCAD, t_P_POC_PSCAD, '--', alpha=0.8, linewidth=3.0);
+CurrentAx[2][1].plot(t_TIME_PSCAD, t_Q_POC_PSCAD, '--', alpha=0.8, linewidth=3.0);
 
-CurrentAx[0][0].plot(t_TIME_PSSE, t_V_INV_PSSE)
-CurrentAx[1][0].plot(t_TIME_PSSE, t_P_INV_PSSE)
-CurrentAx[2][0].plot(t_TIME_PSSE, t_Q_INV_PSSE)
+CurrentAx[0][0].plot(t_TIME_PSSE, t_V_INV_PSSE, '--', alpha=0.8, linewidth=3.0)
+CurrentAx[1][0].plot(t_TIME_PSSE, t_P_INV_PSSE, '--', alpha=0.8, linewidth=3.0)
+CurrentAx[2][0].plot(t_TIME_PSSE, t_Q_INV_PSSE, '--', alpha=0.8, linewidth=3.0)
 # CurrentAx[0][1].plot(t_TIME_PSCAD, t_V_SET_PSCAD,color='orange',linestyle='--')
-CurrentAx[0][1].plot(t_TIME_PSSE, t_V_POC_PSSE)
+CurrentAx[0][1].plot(t_TIME_PSSE, t_V_POC_PSSE, '--', alpha=0.8, linewidth=3.0)
 # CurrentAx[1][1].plot(t_TIME_PSSE, t_P_SET_PSSE,color='green',linestyle='--')
-CurrentAx[1][1].plot(t_TIME_PSSE, t_P_POC_PSSE)
-CurrentAx[2][1].plot(t_TIME_PSSE, t_Q_POC_PSSE)
+CurrentAx[1][1].plot(t_TIME_PSSE, t_P_POC_PSSE, '--', alpha=0.8, linewidth=3.0)
+CurrentAx[2][1].plot(t_TIME_PSSE, t_Q_POC_PSSE,'--', alpha=0.8, linewidth=3.0)
 
 CurrentAx[0][0].tick_params(axis='both', which='both', labelsize=18)
 CurrentAx[1][0].tick_params(axis='both', which='both', labelsize=18)
@@ -156,13 +183,13 @@ CurrentAx[2][1].set_xlim(left=4)
 
 CurrentAx[0][0].set_ylim([0.9, 1.15])
 CurrentAx[0][1].set_ylim([0.9, 1.15])
-CurrentAx[1][0].set_ylim([0, 125])
-CurrentAx[1][1].set_ylim([0, 125])
+CurrentAx[1][0].set_ylim([60, 105])
+CurrentAx[1][1].set_ylim([60, 105])
 # CurrentAx[1][0].set_yticks([0, 20, 40, 60, 80, 85, 100, 120])
 # CurrentAx[1][1].set_yticks([0, 20, 40, 60, 80, 85, 100, 120])
 # CurrentAx[1][1].set_yticks([0, 150])
-CurrentAx[2][0].set_ylim([-50, 50])
-CurrentAx[2][1].set_ylim([-50, 50])
+CurrentAx[2][0].set_ylim([-20, 40])
+CurrentAx[2][1].set_ylim([-40, 20])
 # CurrentAx[2][1].set_yticks([-200, -150, -110.6, -50, 0, 50, 110.6, 150, 200])
 
 CurrentAx[0][0].set_xlabel(r"""TIME/s""")
@@ -187,6 +214,6 @@ CurrentAx[0][1].legend(["V_set_point", "PSCAD", "PSSE"])
 CurrentAx[1][1].legend(["PSCAD", "PSSE", "P_set_point"])
 CurrentAx[2][1].legend(["PSCAD", "PSSE"])
 
-save_figure_name = 'F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/' + '5.2.5.13_VSet_BM.png'
+save_figure_name = 'F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/rev1/' + '5.2.5.13_VSet_BM_2.png'
 CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
 plt.close(CurrentFig)
