@@ -24,7 +24,7 @@ import dyntools
 
 
 test_name = 'Contingency'
-plot_fault = 2  # 1=threephase 2=single pahse 3=phase-phase 4=phase-phase-ground
+plot_fault = 1  # 1=threephase 2=single pahse 3=phase-phase 4=phase-phase-ground
 if plot_fault == 1:
     fault_name ='three Phase'
 if plot_fault == 2:
@@ -38,6 +38,8 @@ if plot_fault == 4:
 
 pscad_file_path = 'D:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/'
 psse_file_path = 'D:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/'
+
+test_no=1;
 time_psse = []
 P_inv_psse = []
 Q_inv_psse = []
@@ -48,19 +50,19 @@ U_poc_psse = []
 
 #[TIME, FREQ, V_INV, V_POC, P_INV, P_POC, Q_INV, Q_POC]),
 if plot_fault == 2:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/BenchmarkingSinglePhase/' + "SinglePhasecontingency_PSSE Fault.csv", 'rb') as t_file:
+    with open('D:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2//BenchmarkingSinglePhase/' + "SinglePhasecontingency_PSSE Fault.csv", 'rb') as t_file:
         FileData = csv.reader(t_file)
         FileData = list(FileData)
 if plot_fault == 1:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/BenchmarkingThreePhase/' + "ThreePhasecontingency_PSSE Fault.csv", 'rb') as t_file:
+    with open('D:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/BenchmarkingThreePhase/' + "ThreePhasecontingency_PSSE Fault.csv", 'rb') as t_file:
         FileData = csv.reader(t_file)
         FileData = list(FileData)
 if plot_fault == 3:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/BenchmarkingTwoPhase/' + "TwoPhasecontingency_PSSE Fault.csv", 'rb') as t_file:
+    with open('D:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/BenchmarkingTwoPhase/' + "TwoPhasecontingency_PSSE Fault.csv", 'rb') as t_file:
         FileData = csv.reader(t_file)
         FileData = list(FileData)
 if plot_fault == 4:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/BenchmarkingTwoPhaseGround/' + "TwoPhaseGroundcontingency_PSSE Fault.csv", 'rb') as t_file:
+    with open('D:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/BenchmarkingTwoPhaseGround/' + "TwoPhaseGroundcontingency_PSSE Fault.csv", 'rb') as t_file:
         FileData = csv.reader(t_file)
         FileData = list(FileData)
 
@@ -92,74 +94,83 @@ Q_poc_pscad = []
 U_poc_pscad = []
 
 #[TIME, FREQ, V_INV, V_POC, P_INV, P_POC, Q_INV, Q_POC]),
-if plot_fault ==1:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/Test01_3Phase0/Test01_3phase0_01.txt') as f1:
-        lines1 = f1.readlines()
-        time_pscad = [float(line.split()[0]) for line in lines1]
-        F_sys_pscad = [float(line.split()[1]) for line in lines1]
-        U_poc_pscad = [float(line.split()[2]) for line in lines1]
-        P_inv_pscad = [float(line.split()[3]) for line in lines1]
-        Q_inv_pscad = [float(line.split()[8]) for line in lines1]
-        U_inv_pscad = [float(line.split()[10]) for line in lines1]
-if plot_fault ==2:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/single_phase/Test05_sPhase0/Test05_sPhase0_01.txt') as f1:
-        lines1 = f1.readlines()
-        time_pscad = [float(line.split()[0]) for line in lines1]
-        F_sys_pscad = [float(line.split()[1]) for line in lines1]
-        U_poc_pscad = [float(line.split()[2]) for line in lines1]
-        P_inv_pscad = [float(line.split()[3]) for line in lines1]
-        Q_inv_pscad = [float(line.split()[8]) for line in lines1]
-        U_inv_pscad = [float(line.split()[10]) for line in lines1]
-if plot_fault ==3:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phase/Test01_2Phase0/Test01_2phase0_01.txt') as f1:
-        lines1 = f1.readlines()
-        time_pscad = [float(line.split()[0]) for line in lines1]
-        F_sys_pscad = [float(line.split()[1]) for line in lines1]
-        U_poc_pscad = [float(line.split()[2]) for line in lines1]
-        P_inv_pscad = [float(line.split()[3]) for line in lines1]
-        Q_inv_pscad = [float(line.split()[8]) for line in lines1]
-        U_inv_pscad = [float(line.split()[10]) for line in lines1]
-if plot_fault ==4:
-    with open( 'F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phasetoground/Test01_2PhaseGround0/Test01_2phaseGround0_01.txt') as f1:
-        lines1 = f1.readlines()
-        time_pscad      = [float(line.split()[0]) for line in lines1]
-        F_sys_pscad = [float(line.split()[1]) for line in lines1]
-        U_poc_pscad = [float(line.split()[2]) for line in lines1]
-        P_inv_pscad = [float(line.split()[3]) for line in lines1]
-        Q_inv_pscad = [float(line.split()[8]) for line in lines1]
-        U_inv_pscad = [float(line.split()[10]) for line in lines1]
-if plot_fault ==1:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/three_phase/Test01_3Phase0/Test01_3phase0_02.txt') as f2:
-        lines2 = f2.readlines()
-        Q_poc_pscad = [float(line.split()[9]) for line in lines2]
-if plot_fault ==2:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/single_phase/Test05_sPhase0/Test05_sphase0_02.txt') as f2:
-        lines2 = f2.readlines()
-        Q_poc_pscad = [float(line.split()[9]) for line in lines2]
-if plot_fault == 3:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phase/Test01_2Phase0/Test01_2phase0_02.txt') as f2:
-        lines2 = f2.readlines()
-        Q_poc_pscad = [float(line.split()[9]) for line in lines2]
-if plot_fault == 4:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phasetoground/Test01_2PhaseGround0/Test01_2phaseGround0_02.txt') as f2:
-        lines2 = f2.readlines()
-        Q_poc_pscad = [float(line.split()[9]) for line in lines2]
-if plot_fault == 1:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/three_phase/Test01_3Phase0/Test01_3phase0_03.txt') as f3:
-        lines3 = f3.readlines()
-        P_poc_pscad = [float(line.split()[2]) for line in lines3]
-if plot_fault == 2:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/single_phase/Test05_sPhase0/Test05_sphase0_03.txt') as f3:
-        lines3 = f3.readlines()
-        P_poc_pscad = [float(line.split()[2]) for line in lines3]
-if plot_fault == 3:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phase/Test01_2Phase0/Test01_2phase0_03.txt') as f3:
-        lines3 = f3.readlines()
-        P_poc_pscad = [float(line.split()[2]) for line in lines3]
-if plot_fault == 4:
-    with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phasetoground/Test01_2PhaseGround0/Test01_2phaseGround0_03.txt') as f3:
-        lines3 = f3.readlines()
-        P_poc_pscad = [float(line.split()[2]) for line in lines3]
+
+with open(pscad_file_path+'test'+test_no+'/'+'FaultTest'+test_no+'_01.txt') as f1:
+    lines1 = f1.readlines()
+    time_pscad = [float(line.split()[0]) for line in lines1]
+    F_sys_pscad = [float(line.split()[1]) for line in lines1]
+    U_poc_pscad = [float(line.split()[2]) for line in lines1]
+    P_inv_pscad = [float(line.split()[3]) for line in lines1]
+    Q_inv_pscad = [float(line.split()[8]) for line in lines1]
+    U_inv_pscad = [float(line.split()[10]) for line in lines1]
+
+with open(pscad_file_path+'test'+test_no+'/'+'FaultTest'+test_no+'_02.txt') as f2:
+    lines2 = f2.readlines()
+    Q_poc_pscad = [float(line.split()[9]) for line in lines2]
+
+with open(pscad_file_path+'test'+test_no+'/'+'FaultTest'+test_no+'_03.txt') as f3:
+    lines3 = f3.readlines()
+    P_poc_pscad = [float(line.split()[2]) for line in lines3]
+
+# if plot_fault ==2:
+#     with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/single_phase/Test05_sPhase0/Test05_sPhase0_01.txt') as f1:
+#         lines1 = f1.readlines()
+#         time_pscad = [float(line.split()[0]) for line in lines1]
+#         F_sys_pscad = [float(line.split()[1]) for line in lines1]
+#         U_poc_pscad = [float(line.split()[2]) for line in lines1]
+#         P_inv_pscad = [float(line.split()[3]) for line in lines1]
+#         Q_inv_pscad = [float(line.split()[8]) for line in lines1]
+#         U_inv_pscad = [float(line.split()[10]) for line in lines1]
+# if plot_fault ==3:
+#     with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phase/Test01_2Phase0/Test01_2phase0_01.txt') as f1:
+#         lines1 = f1.readlines()
+#         time_pscad = [float(line.split()[0]) for line in lines1]
+#         F_sys_pscad = [float(line.split()[1]) for line in lines1]
+#         U_poc_pscad = [float(line.split()[2]) for line in lines1]
+#         P_inv_pscad = [float(line.split()[3]) for line in lines1]
+#         Q_inv_pscad = [float(line.split()[8]) for line in lines1]
+#         U_inv_pscad = [float(line.split()[10]) for line in lines1]
+# if plot_fault ==4:
+#     with open( 'F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phasetoground/Test01_2PhaseGround0/Test01_2phaseGround0_01.txt') as f1:
+#         lines1 = f1.readlines()
+#         time_pscad      = [float(line.split()[0]) for line in lines1]
+#         F_sys_pscad = [float(line.split()[1]) for line in lines1]
+#         U_poc_pscad = [float(line.split()[2]) for line in lines1]
+#         P_inv_pscad = [float(line.split()[3]) for line in lines1]
+#         Q_inv_pscad = [float(line.split()[8]) for line in lines1]
+#         U_inv_pscad = [float(line.split()[10]) for line in lines1]
+# if plot_fault ==1:
+#     with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/three_phase/Test01_3Phase0/Test01_3phase0_02.txt') as f2:
+#         lines2 = f2.readlines()
+#         Q_poc_pscad = [float(line.split()[9]) for line in lines2]
+# if plot_fault ==2:
+#     with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/single_phase/Test05_sPhase0/Test05_sphase0_02.txt') as f2:
+#         lines2 = f2.readlines()
+#         Q_poc_pscad = [float(line.split()[9]) for line in lines2]
+# if plot_fault == 3:
+#     with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phase/Test01_2Phase0/Test01_2phase0_02.txt') as f2:
+#         lines2 = f2.readlines()
+#         Q_poc_pscad = [float(line.split()[9]) for line in lines2]
+# if plot_fault == 4:
+#     with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phasetoground/Test01_2PhaseGround0/Test01_2phaseGround0_02.txt') as f2:
+#         lines2 = f2.readlines()
+#         Q_poc_pscad = [float(line.split()[9]) for line in lines2]
+# if plot_fault == 1:
+#     with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/three_phase/Test01_3Phase0/Test01_3phase0_03.txt') as f3:
+#         lines3 = f3.readlines()
+#         P_poc_pscad = [float(line.split()[2]) for line in lines3]
+# if plot_fault == 2:
+#     with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/single_phase/Test05_sPhase0/Test05_sphase0_03.txt') as f3:
+#         lines3 = f3.readlines()
+#         P_poc_pscad = [float(line.split()[2]) for line in lines3]
+# if plot_fault == 3:
+#     with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phase/Test01_2Phase0/Test01_2phase0_03.txt') as f3:
+#         lines3 = f3.readlines()
+#         P_poc_pscad = [float(line.split()[2]) for line in lines3]
+# if plot_fault == 4:
+#     with open('F:/PosDoc Projects/11_Industrial Projects/HuaWei/PSCAD_DATA/2phasetoground/Test01_2PhaseGround0/Test01_2phaseGround0_03.txt') as f3:
+#         lines3 = f3.readlines()
+#         P_poc_pscad = [float(line.split()[2]) for line in lines3]
 
 
 time_pscad = numpy.array(time_pscad)
@@ -276,7 +287,7 @@ CurrentAx[2][1].legend(["PSCAD", "PSSE"])
 # CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
 # plt.close(CurrentFig)
 
-save_figure_name = 'F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/rev1/5.2.5.5_' +  fault_name+'_01_rev.png'
+save_figure_name = 'D:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/rev2/5.2.5.5_' +  fault_name+'_01_rev.png'
 # save_figure_name = 'F:/PosDoc Projects/11_Industrial Projects/HuaWei/WISF/R_Results_2/' + '5.2.5.5_Two PHASE_to ground Fault_01.png'
 CurrentFig.savefig(save_figure_name, format='png', dpi=150, bbox_inches='tight')
 plt.close(CurrentFig)
